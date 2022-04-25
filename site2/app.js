@@ -124,30 +124,21 @@ function collisionBorder() {
 }
 
 let keybrdPressFlag = false;
+const keysColl = {
+  w: ["KeyW", 0, -snake.stepSize],
+  s: ["KeyS", 0,  snake.stepSize],
+  a: ["KeyA", -snake.stepSize, 0],
+  d: ["KeyD",  snake.stepSize, 0],
+}
 document.addEventListener("keydown", e => {
-  movingTailCollision.dirX = snake.dirX;
-  movingTailCollision.dirY = snake.dirY;
-  if (e.code == "KeyW") {
-    snake.dirX = 0;
-    snake.dirY = -snake.stepSize;
-    keybrdPressFlag = true;
+  for (const key in keysColl) {
+    if (e.code == keysColl[key][0]){
+      console.log(keysColl[key][0], keysColl[key][1], keysColl[key][2]);
+      snake.dirX = keysColl[key][1];
+      snake.dirY = keysColl[key][2];
+      keybrdPressFlag = true;
+    }
   }
-  else if (e.code == "KeyS") {
-    snake.dirX = 0;
-    snake.dirY = snake.stepSize;
-    keybrdPressFlag = true;
-  }
-  else if (e.code == "KeyA") {
-    snake.dirY = 0;
-    snake.dirX = -snake.stepSize;
-    keybrdPressFlag = true;
-  }
-  else if (e.code == "KeyD") {
-    snake.dirY = 0;
-    snake.dirX = snake.stepSize;
-    keybrdPressFlag = true;
-  }
-  movingTailCollision();
 });
 
 const movingTailCollision = () => {
