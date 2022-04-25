@@ -23,7 +23,7 @@ const fieldProperties = {
   maxStep: 10,
 }
 
-let snake = {
+const snake = {
   sizeCell: 16,
   x: 160,
   y: 160,
@@ -36,7 +36,7 @@ let snake = {
   bodyColor: "midnightblue",
 }
 
-let berry = {
+const berry = {
   x: 0,
   y: 0,
   avaliableSize: [8, 16],
