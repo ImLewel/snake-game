@@ -83,11 +83,12 @@ const drawSnake = () => {
       snake.maxTails+=bonus;
       berryPos();
     }
-         if (snake.dirX < 0 && head.x - 16 === cell.x && head.y === cell.y) refreshGame();
-    else if (snake.dirX > 0 && head.x + 16 === cell.x && head.y === cell.y) refreshGame();
-    else if (snake.dirY < 0 && head.y - 16 === cell.y && head.x === cell.x) refreshGame();
-    else if (snake.dirY > 0 && head.y + 16 === cell.y && head.x === cell.x) refreshGame();
+    if (keybrdPressFlag) checkSelfCollision(head, cell);
   }
+}
+
+const checkSelfCollision = (head, cell) => {
+  if (head != cell && head.x === cell.x && head.y === cell.y) refreshGame();
 }
 
 const refreshGame = () => {
@@ -99,6 +100,7 @@ const refreshGame = () => {
   snake.dirY = 0;
   scoreCount = 0;
   berryPos();
+  keybrdPressFlag = false;
 }
 
 const drawBerry = () => {
@@ -121,24 +123,29 @@ function collisionBorder() {
   else if (snake.y >= canvas.height) snake.y = 0;
 }
 
+let keybrdPressFlag = false;
 document.addEventListener("keydown", e => {
   movingTailCollision.dirX = snake.dirX;
   movingTailCollision.dirY = snake.dirY;
   if (e.code == "KeyW") {
     snake.dirX = 0;
     snake.dirY = -snake.stepSize;
+    keybrdPressFlag = true;
   }
   else if (e.code == "KeyS") {
     snake.dirX = 0;
     snake.dirY = snake.stepSize;
+    keybrdPressFlag = true;
   }
   else if (e.code == "KeyA") {
     snake.dirY = 0;
     snake.dirX = -snake.stepSize;
+    keybrdPressFlag = true;
   }
   else if (e.code == "KeyD") {
     snake.dirY = 0;
     snake.dirX = snake.stepSize;
+    keybrdPressFlag = true;
   }
   movingTailCollision();
 });
