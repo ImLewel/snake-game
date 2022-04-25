@@ -7,21 +7,21 @@ const bodyExample = document.querySelector('#body');
 const score = document.getElementById('score');
 const record = document.getElementById('record');
 const context = canvas.getContext('2d');
-  width = 512,
-  height = 384;
-let scoreCount = 0,
-  recordCount = 0,
-  bonus;
 
-canvas.width = width;
-canvas.height = height;
-canvas.style.width = `${width}px`;
-canvas.style.height = `${height}px`;
-
-const fieldProperties = {
+const roomData = {
   step: 0,
   maxStep: 10,
+  width: 512,
+  height: 384,
+  scoreCount: 0,
+  recordCount: 0,
+  bonus: 0,
 }
+
+canvas.width = roomData.width;
+canvas.height = roomData.height;
+canvas.style.width = `${roomData.width}px`;
+canvas.style.height = `${roomData.height}px`;
 
 const snake = {
   sizeCell: 16,
@@ -53,14 +53,14 @@ const getRandomInt = (min, max) => {
 const gameLoop = () => {
   requestAnimationFrame(gameLoop);
 
-  if (++fieldProperties.step < fieldProperties.maxStep) return;
-  fieldProperties.step = 0;
+  if (++roomData.step < roomData.maxStep) return;
+  roomData.step = 0;
   context.clearRect(0, 0, canvas.width, canvas.height);
   drawSnake();
   drawBerry();
   getColor();
-  score.innerHTML = `Your current score is ${scoreCount}`;
-  record.innerHTML = `Your record was ${recordCount}`;
+  score.innerHTML = `Your current score is ${roomData.scoreCount}`;
+  record.innerHTML = `Your record was ${roomData.recordCount}`;
 }
 requestAnimationFrame(gameLoop);
 
@@ -76,11 +76,11 @@ const drawSnake = () => {
     else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
     if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
-      if (berry.sizeBerry === berry.avaliableSize[0]) bonus = 1;
-      else bonus = 2;
-      scoreCount+=bonus;
-      if (scoreCount > recordCount) recordCount+=bonus;
-      snake.maxTails+=bonus;
+      if (berry.sizeBerry === berry.avaliableSize[0]) roomData.bonus = 1;
+      else roomData.bonus = 2;
+      roomData.scoreCount+=roomData.bonus;
+      if (roomData.scoreCount > roomData.recordCount) roomData.recordCount+=roomData.bonus;
+      snake.maxTails+=roomData.bonus;
       berryPos();
     }
     if (keybrdPressFlag) checkSelfCollision(head, cell);
@@ -98,7 +98,7 @@ const refreshGame = () => {
   snake.maxTails = 20;
   snake.dirX = 0;
   snake.dirY = 0;
-  scoreCount = 0;
+  roomData.scoreCount = 0;
   berryPos();
   keybrdPressFlag = false;
 }
@@ -159,16 +159,16 @@ const getFieldWidth = () => {
   for (let elem of widthSelector) {
     elem.onclick = () => {
       if (Array.from(widthSelector).indexOf(elem) === 0) {
-        canvas.width = width;
-        canvas.height = height;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        canvas.width = roomData.width;
+        canvas.height = roomData.height;
+        canvas.style.width = `${roomData.width}px`;
+        canvas.style.height = `${roomData.height}px`;
       }
       else {
-        canvas.width = width * 1.5;
-        canvas.height = height * 1.25;
-        canvas.style.width = `${width * 1.5}px`;
-        canvas.style.height = `${height * 1.25}px`;
+        canvas.width = roomData.width * 1.5;
+        canvas.height = roomData.height * 1.25;
+        canvas.style.width = `${roomData.width * 1.5}px`;
+        canvas.style.height = `${roomData.height * 1.25}px`;
       }
     }
   }
