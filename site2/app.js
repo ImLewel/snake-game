@@ -130,10 +130,10 @@ const keysColl = {
   a: ["KeyA", -snake.stepSize, 0],
   d: ["KeyD",  snake.stepSize, 0],
 }
+
 document.addEventListener("keydown", e => {
   for (const key in keysColl) {
-    if (e.code == keysColl[key][0]){
-      console.log(keysColl[key][0], keysColl[key][1], keysColl[key][2]);
+    if (e.code == keysColl[key][0]) {
       snake.dirX = keysColl[key][1];
       snake.dirY = keysColl[key][2];
       keybrdPressFlag = true;
@@ -141,16 +141,7 @@ document.addEventListener("keydown", e => {
   }
 });
 
-const movingTailCollision = () => {
-  if (snake.tails[1].x == snake.x + snake.dirX) {
-    snake.dirX = movingTailCollision.dirX;
-  }
-  if (snake.tails[1].y == snake.y + snake.dirY) {
-    snake.dirY = movingTailCollision.dirY;
-  }
-}
-
-const snakeColors = ['blue', 'red', 'green', 'yellow', 'brown', 'purple', 'pink', 'orange'];
+const snakeColors = ['blue', 'red', 'green', 'lightgreen', 'brown', 'purple', 'pink', 'orange'];
 headExample.style.backgroundColor = snakeColors[0];
 bodyExample.style.backgroundColor = snakeColors[0];
 const getColor = () => {
