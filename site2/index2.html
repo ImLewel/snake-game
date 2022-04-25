@@ -21,6 +21,10 @@
             </ul>
         </nav>
         <main class="transition">
+            <img class="faces" id="face0" src="faces/image0.png" height="16px" width="16px">
+            <img class="faces" id="face1" src="faces/image1.png" height="16px" width="16px">
+            <img class="faces" id="face2" src="faces/image2.png" height="16px" width="16px">
+            <img class="faces" id="face3" src="faces/image3.png" height="16px" width="16px">
             <div id="canvasWrapper">
                 <canvas id="game-canvas"></canvas>
                 <div id="dataField">
@@ -34,6 +38,9 @@
                         <span style="text-align:center">Body</span>
                         <input type="range" min="0" max="7" value="0" class="slider" id="bodyColor">
                         <div id="body" style="height:30px; width:30px" class="examples"></div>
+                        <span style="text-align:center">Face</span>
+                        <input type="range" min="0" max="3" value="0" class="slider" id="faceSlider">
+                        <div id="faceExample" style="height:30px; width:30px" class="examples"></div>
                     </div>
                     <span style="position:relative; top:0; width: contain; text-align:center; font-weight:bold;">Size of game field:</span>
                     <div id="buttonWrapper">

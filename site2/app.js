@@ -4,9 +4,12 @@ const headColor = document.querySelector('#headColor');
 const bodyColor = document.querySelector('#bodyColor');
 const headExample = document.querySelector('#head');
 const bodyExample = document.querySelector('#body');
+const faceExample = document.querySelector('#faceExample');
 const score = document.getElementById('score');
 const record = document.getElementById('record');
 const context = canvas.getContext('2d');
+const faceSlider = document.getElementById('faceSlider');
+const faces = document.querySelectorAll('.faces');
 
 const roomData = {
   step: 0,
@@ -32,6 +35,7 @@ const snake = {
   stepSize: 16,
   tails: [],
   maxTails: 20,
+  face: null,
   headColor: "blue",
   bodyColor: "midnightblue",
 }
@@ -68,6 +72,7 @@ const drawSnake = () => {
   snake.x += snake.dirX;
   snake.y += snake.dirY;
   collisionBorder()
+  getFace();
   snake.tails.unshift({ x: snake.x, y: snake.y });
   head = snake.tails[0];
   if (snake.tails.length > snake.maxTails) snake.tails.pop();
@@ -75,6 +80,7 @@ const drawSnake = () => {
     if (cell === head) context.fillStyle = snake.headColor;
     else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
+    if (snake.face != null) context.drawImage(snake.face, head.x, head.y);
     checkBerryCollision(cell);
     if (keybrdPressFlag) checkSelfCollision(head, cell);
   }
@@ -156,6 +162,18 @@ const getColor = () => {
   bodyColor.oninput = () => {
     snake.bodyColor = snakeColors[bodyColor.value];
     bodyExample.style.backgroundColor = snakeColors[bodyColor.value];
+  }
+}
+
+const facesArr = Array.from(faces);
+faceExample.style.backgroundImage = `url(${facesArr[0].src})`;
+faceExample.style.backgroundSize = 'cover';
+const getFace = () => {
+  faceSlider.oninput = () => {
+    if (faceSlider.value > 0) snake.face = facesArr[faceSlider.value];
+    else snake.face = null;
+    faceExample.style.backgroundImage = `url(${facesArr[faceSlider.value].src})`;
+    faceExample.style.backgroundSize = 'cover';
   }
 }
 
