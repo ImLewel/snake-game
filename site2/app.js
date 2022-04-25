@@ -75,15 +75,19 @@ const drawSnake = () => {
     if (cell === head) context.fillStyle = snake.headColor;
     else context.fillStyle = snake.bodyColor;
     context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
-    if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
-      if (berry.sizeBerry === berry.avaliableSize[0]) roomData.bonus = 1;
-      else roomData.bonus = 2;
-      roomData.scoreCount+=roomData.bonus;
-      if (roomData.scoreCount > roomData.recordCount) roomData.recordCount+=roomData.bonus;
-      snake.maxTails+=roomData.bonus;
-      berryPos();
-    }
+    checkBerryCollision(cell);
     if (keybrdPressFlag) checkSelfCollision(head, cell);
+  }
+}
+
+const checkBerryCollision = (cell) => {
+  if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
+    if (berry.sizeBerry === berry.avaliableSize[0]) roomData.bonus = 1;
+    else roomData.bonus = 2;
+    if (roomData.scoreCount > roomData.recordCount) roomData.recordCount+=roomData.bonus;
+    roomData.scoreCount+=roomData.bonus;
+    snake.maxTails+=roomData.bonus;
+    berryPos();
   }
 }
 
