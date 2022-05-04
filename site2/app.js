@@ -5,11 +5,14 @@ const bodyColor = document.querySelector('#bodyColor');
 const headExample = document.querySelector('#head');
 const bodyExample = document.querySelector('#body');
 const faceExample = document.querySelector('#faceExample');
+const tileExample = document.querySelector('#tileExample');
 const score = document.getElementById('score');
 const record = document.getElementById('record');
 const context = canvas.getContext('2d');
 const faceSlider = document.getElementById('faceSlider');
+const tileSlider = document.getElementById('tileSlider');
 const faces = document.querySelectorAll('.faces');
+const tiles = document.querySelectorAll('.tiles');
 
 const roomData = {
   step: 0,
@@ -60,6 +63,8 @@ const gameLoop = () => {
   if (++roomData.step < roomData.maxStep) return;
   roomData.step = 0;
   context.clearRect(0, 0, canvas.width, canvas.height);
+  getTile();
+  mapTiler();
   drawSnake();
   drawBerry();
   getColor();
@@ -196,3 +201,22 @@ const getFieldWidth = () => {
   }
 }
 getFieldWidth();
+
+let img = new Image();
+const tilesArr = Array.from(tiles);
+tileExample.style.backgroundImage = `url(${tilesArr[0].src})`;
+tileExample.style.backgroundSize = 'cover';
+img.src = tiles[0].src;
+const getTile = () => {
+  tileSlider.oninput = () => {
+    img.src = tilesArr[tileSlider.value].src;
+    tileExample.style.backgroundImage = `url(${tilesArr[tileSlider.value].src})`;
+    tileExample.style.backgroundSize = 'cover';
+  }
+}
+
+const mapTiler = () => {
+  const pattern = context.createPattern(img, 'repeat');
+  context.fillStyle = pattern;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+}
