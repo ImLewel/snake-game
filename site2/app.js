@@ -131,12 +131,14 @@ const berryPos = () => {
   let index = getRandomInt(0, berry.avaliableSize.length - 1);
   berry.sizeBerry = berry.avaliableSize[index];
   indent = align();
-  berry.x = getRandomPos(canvas.width);
-  berry.y = getRandomPos(canvas.height);
+  berry.x = getRandomPos(canvas.width - snake.sizeCell);
+  berry.y = getRandomPos(canvas.height - snake.sizeCell);
+  console.log(berry.x, berry.y);
 }
 
 const getRandomPos = (dimension) => {
-  return ((getRandomInt(0, dimension / snake.sizeCell) * snake.sizeCell) + indent);
+  const pos = ((getRandomInt(0, dimension / snake.sizeCell) * snake.sizeCell) + indent);
+  return pos;
 }
 
 berryPos();
