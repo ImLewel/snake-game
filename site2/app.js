@@ -82,13 +82,17 @@ const drawSnake = () => {
   head = snake.tails[0];
   if (snake.tails.length > snake.maxTails) snake.tails.pop();
   for (let cell of snake.tails) {
-    if (cell === head) context.fillStyle = snake.headColor;
-    else context.fillStyle = snake.bodyColor;
-    context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
+    setSnakeColor(cell);
     if (snake.face != null) context.drawImage(snake.face, head.x, head.y);
     checkBerryCollision(cell);
     if (keybrdPressFlag) checkSelfCollision(head, cell);
   }
+}
+
+const setSnakeColor = (cell) => {
+  if (cell === head) context.fillStyle = snake.headColor;
+  else context.fillStyle = snake.bodyColor;
+  context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 }
 
 const checkBerryCollision = (cell) => {
