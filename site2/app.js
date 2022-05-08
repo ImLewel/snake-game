@@ -46,7 +46,7 @@ const snake = {
 const berry = {
   x: 0,
   y: 0,
-  avaliableSize: [8, 16],
+  avaliableSize: [8, 8, 8, 16],
   sizeBerry: 8,
 }
 
@@ -54,7 +54,7 @@ const align = () => { return ((snake.sizeCell - berry.sizeBerry) / 2); }
 let indent;
 
 const getRandomInt = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min) + min);
 }
 
 const gameLoop = () => {
@@ -128,7 +128,8 @@ const drawBerry = () => {
 }
 
 const berryPos = () => {
-  berry.sizeBerry = berry.avaliableSize[Math.round(Math.random())];
+  let index = getRandomInt(0, berry.avaliableSize.length - 1);
+  berry.sizeBerry = berry.avaliableSize[index];
   indent = align();
   berry.x = getRandomPos(canvas.width);
   berry.y = getRandomPos(canvas.height);
