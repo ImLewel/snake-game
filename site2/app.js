@@ -126,9 +126,14 @@ const drawBerry = () => {
 const berryPos = () => {
   berry.sizeBerry = berry.avaliableSize[Math.round(Math.random())];
   indent = align();
-  berry.x = (getRandomInt(0, canvas.width / snake.sizeCell) * snake.sizeCell) + indent;
-  berry.y = getRandomInt(0, canvas.height / snake.sizeCell) * snake.sizeCell + indent;
+  berry.x = getRandomPos(canvas.width);
+  berry.y = getRandomPos(canvas.height);
 }
+
+const getRandomPos = (dimension) => {
+  return ((getRandomInt(0, dimension / snake.sizeCell) * snake.sizeCell) + indent);
+}
+
 berryPos();
 
 function collisionBorder() {
