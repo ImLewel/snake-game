@@ -141,7 +141,7 @@ const getRandomPos = (dimension) => {
 
 berryPos();
 
-function collisionBorder() {
+const collisionBorder = () => {
   if (snake.x < 0) snake.x = canvas.width - snake.sizeCell;
   else if (snake.x >= canvas.width) snake.x = 0;
   if (snake.y < 0) snake.y = canvas.height - snake.sizeCell;
