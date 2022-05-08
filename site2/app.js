@@ -190,17 +190,19 @@ const getFace = () => {
 const getFieldWidth = () => {
   for (let elem of widthSelector) {
     elem.onclick = () => {
-      if (Array.from(widthSelector).indexOf(elem) === 0) {
-        canvas.width = roomData.width;
-        canvas.height = roomData.height;
-        canvas.style.width = `${roomData.width}px`;
-        canvas.style.height = `${roomData.height}px`;
-      }
-      else {
-        canvas.width = roomData.width * 1.5;
-        canvas.height = roomData.height * 1.25;
-        canvas.style.width = `${roomData.width * 1.5}px`;
-        canvas.style.height = `${roomData.height * 1.25}px`;
+      if (!keybrdPressFlag) {
+        if (Array.from(widthSelector).indexOf(elem) === 0) {
+          canvas.width = roomData.width;
+          canvas.height = roomData.height;
+          canvas.style.width = `${roomData.width}px`;
+          canvas.style.height = `${roomData.height}px`;
+        }
+        else {
+          canvas.width = roomData.width * 1.5;
+          canvas.height = roomData.height * 1.25;
+          canvas.style.width = `${roomData.width * 1.5}px`;
+          canvas.style.height = `${roomData.height * 1.25}px`;
+        }
       }
     }
   }
