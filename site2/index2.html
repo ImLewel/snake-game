@@ -21,14 +21,6 @@
             </ul>
         </nav>
         <main class="transition">
-            <img class="faces" id="face0" src="faces/image0.png" height="16px" width="16px">
-            <img class="faces" id="face1" src="faces/image1.png" height="16px" width="16px">
-            <img class="faces" id="face2" src="faces/image2.png" height="16px" width="16px">
-            <img class="faces" id="face3" src="faces/image3.png" height="16px" width="16px">
-            <img class="tiles" id="tile0" src="tiles/tile0.png" height="16px" width="16px">
-            <img class="tiles" id="tile1" src="tiles/tile1.png" height="16px" width="16px">
-            <img class="tiles" id="tile2" src="tiles/tile2.png" height="16px" width="16px">
-            <img class="tiles" id="tile3" src="tiles/tile3.png" height="16px" width="16px">
             <div id="canvasWrapper">
                 <canvas id="game-canvas"></canvas>
                 <div id="dataField">
@@ -44,10 +36,10 @@
                         <div id="body" style="height:30px; width:30px" class="examples"></div>
                         <span style="text-align:center">Face</span>
                         <input type="range" min="0" max="3" value="0" class="slider" id="faceSlider">
-                        <div id="faceExample" style="height:30px; width:30px" class="examples"></div>
+                        <img src="./faces/face0.png" id="faceExample" style="height:30px; width:30px" class="examples">
                         <span style="text-align:center">Tile</span>
                         <input type="range" min="0" max="3" value="0" class="slider" id="tileSlider">
-                        <div id="tileExample" style="height:30px; width:30px" class="examples"></div>
+                        <img src="./tiles/tile0.png" id="tileExample" style="height:30px; width:30px" class="examples">
                         <span style="text-align:center">Music</span>
                         <input type="range" min="0" max="10" value="0" class="slider" id="musicSlider">
                         <img id="musicPic" src="./volumeIcons/volumeOff.png" style="height:30px; width:30px" class="examples">

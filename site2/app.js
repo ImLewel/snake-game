@@ -63,8 +63,8 @@ const gameLoop = () => {
   if (++roomData.step < roomData.maxStep) return;
   roomData.step = 0;
   context.clearRect(0, 0, canvas.width, canvas.height);
-  getTile();
   mapTiler();
+  getCustoms();
   drawSnake();
   drawBerry();
   getColor();
@@ -76,8 +76,9 @@ requestAnimationFrame(gameLoop);
 const drawSnake = () => {
   snake.x += snake.dirX;
   snake.y += snake.dirY;
-  collisionBorder()
-  getFace();
+  collisionBorder();
+  if (faceSlider.value != 0) snake.face = faceExample;
+  else snake.face = null;
   snake.tails.unshift({ x: snake.x, y: snake.y });
   head = snake.tails[0];
   if (snake.tails.length > snake.maxTails) snake.tails.pop();
@@ -182,18 +183,6 @@ const getColor = () => {
   }
 }
 
-const facesArr = Array.from(faces);
-faceExample.style.backgroundImage = `url(${facesArr[0].src})`;
-faceExample.style.backgroundSize = 'cover';
-const getFace = () => {
-  faceSlider.oninput = () => {
-    if (faceSlider.value > 0) snake.face = facesArr[faceSlider.value];
-    else snake.face = null;
-    faceExample.style.backgroundImage = `url(${facesArr[faceSlider.value].src})`;
-    faceExample.style.backgroundSize = 'cover';
-  }
-}
-
 const getFieldWidth = () => {
   for (let elem of widthSelector) {
     elem.onclick = () => {
@@ -216,21 +205,17 @@ const getFieldWidth = () => {
 }
 getFieldWidth();
 
-let img = new Image();
-const tilesArr = Array.from(tiles);
-tileExample.style.backgroundImage = `url(${tilesArr[0].src})`;
-tileExample.style.backgroundSize = 'cover';
-img.src = tiles[0].src;
-const getTile = () => {
-  tileSlider.oninput = () => {
-    img.src = tilesArr[tileSlider.value].src;
-    tileExample.style.backgroundImage = `url(${tilesArr[tileSlider.value].src})`;
-    tileExample.style.backgroundSize = 'cover';
+let cases = [[faceSlider, faceExample, 'faces'],[tileSlider, tileExample, 'tiles']];
+const getCustoms = () => {
+  for (let elem of cases) {
+    elem[0].oninput = () => {
+      elem[1].src = `./${elem[2]}/${elem[2].substring(0,4)}${elem[0].value}.png`; // i.e. './faces/face0.png'
+    }    
   }
 }
 
 const mapTiler = () => {
-  const pattern = context.createPattern(img, 'repeat');
+  const pattern = context.createPattern(tileExample, 'repeat');
   context.fillStyle = pattern;
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
