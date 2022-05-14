@@ -11,8 +11,6 @@ const record = document.getElementById('record');
 const context = canvas.getContext('2d');
 const faceSlider = document.getElementById('faceSlider');
 const tileSlider = document.getElementById('tileSlider');
-const faces = document.querySelectorAll('.faces');
-const tiles = document.querySelectorAll('.tiles');
 
 const roomData = {
   step: 0,
