@@ -134,7 +134,6 @@ const berryPos = () => {
   indent = align();
   berry.x = getRandomPos(canvas.width - snake.sizeCell);
   berry.y = getRandomPos(canvas.height - snake.sizeCell);
-  console.log(berry.x, berry.y);
 }
 
 const getRandomPos = (dimension) => {
