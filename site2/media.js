@@ -5,10 +5,14 @@ myAudio.volume = 0.5;
 const setVolume = () => {
   musicSlider.oninput = () => {
     myAudio.volume = musicSlider.value/10;
-    myAudio.muted = false;
-    myAudio.play();
-    if (myAudio.volume === 0) musicPic.src = './volumeIcons/volumeOff.png';
-    else musicPic.src = './volumeIcons/volumeOn.png';
+    if (myAudio.volume === 0) {
+      musicPic.src = './volumeIcons/volumeOff.png';
+      myAudio.muted = true;
+    } else {
+      musicPic.src = './volumeIcons/volumeOn.png';
+      myAudio.muted = false;
+      myAudio.play();
+    }
   }
 }
 setVolume();
