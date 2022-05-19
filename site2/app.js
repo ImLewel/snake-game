@@ -202,7 +202,7 @@ let cases = [[faceSlider, faceExample, 'faces'],[tileSlider, tileExample, 'tiles
 const getCustoms = () => {
   for (let elem of cases) {
     elem[0].oninput = () => {
-      elem[1].src = `./${elem[2]}/${elem[2].substring(0,4)}${elem[0].value}.png`; // i.e. './faces/face0.png'
+      elem[1].src = `./${elem[2]}/${elem[2].substring(0,4) + elem[0].value}.png`; // i.e. './faces/face0.png'
     }    
   }
 }
