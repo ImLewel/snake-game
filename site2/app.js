@@ -62,10 +62,8 @@ const gameLoop = () => {
   roomData.step = 0;
   context.clearRect(0, 0, canvas.width, canvas.height);
   mapTiler();
-  getCustoms();
   drawSnake();
   drawBerry();
-  getColor();
   score.innerHTML = `Your current score is ${roomData.scoreCount}`;
   record.innerHTML = `Your record was ${roomData.recordCount}`;
 }
@@ -179,6 +177,7 @@ const getColor = () => {
     bodyExample.style.backgroundColor = snakeColors[bodyColor.value];
   }
 }
+getColor();
 
 const getFieldWidth = () => {
   for (let elem of widthSelector) {
@@ -210,6 +209,7 @@ const getCustoms = () => {
     }    
   }
 }
+getCustoms();
 
 const mapTiler = () => {
   const pattern = context.createPattern(tileExample, 'repeat');
