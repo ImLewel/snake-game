@@ -194,7 +194,7 @@ nav:hover ~ main { /*Смена размера основной части пр�
   align-items:center;
   justify-content:center;
   grid-template-columns: 55px 165px 40px;
-  grid-template-rows: 40px 40px 40px 40px 40px;
+  grid-template-rows: repeat(5, 40px);
 }
 
 .examples{/*Примеры цветов*/

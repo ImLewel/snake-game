@@ -2,8 +2,6 @@ const canvas = document.getElementById('game-canvas');
 const widthSelector = document.querySelectorAll('.fieldSizeBtn');
 const headColor = document.querySelector('#headColor');
 const bodyColor = document.querySelector('#bodyColor');
-const headExample = document.querySelector('#head');
-const bodyExample = document.querySelector('#body');
 const faceExample = document.querySelector('#faceExample');
 const tileExample = document.querySelector('#tileExample');
 const score = document.getElementById('score');
@@ -37,8 +35,6 @@ const snake = {
   tails: [],
   maxTails: 20,
   face: null,
-  headColor: "blue",
-  bodyColor: "midnightblue",
 }
 
 const berry = {
@@ -87,8 +83,10 @@ const drawSnake = () => {
 }
 
 const setSnakeColor = (cell) => {
-  if (cell === head) context.fillStyle = snake.headColor;
-  else context.fillStyle = snake.bodyColor;
+  if (cell === head) 
+    context.fillStyle = colorColl.head.part || headColor.value;
+  else
+   context.fillStyle = colorColl.body.part || bodyColor.value;
   context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 }
 
@@ -164,17 +162,16 @@ document.addEventListener("keydown", e => {
   }
 });
 
-const snakeColors = ['blue', 'red', 'green', 'lightgreen', 'brown', 'purple', 'pink', 'orange'];
-headExample.style.backgroundColor = snakeColors[0];
-bodyExample.style.backgroundColor = snakeColors[0];
+const colorColl = {
+  head: {slider: headColor, part: null},
+  body: {slider: bodyColor, part: null},
+}
+
 const getColor = () => {
-  headColor.oninput = () => {
-    snake.headColor = snakeColors[headColor.value];
-    headExample.style.backgroundColor = snakeColors[headColor.value];
-  }
-  bodyColor.oninput = () => {
-    snake.bodyColor = snakeColors[bodyColor.value];
-    bodyExample.style.backgroundColor = snakeColors[bodyColor.value];
+  for (let obj in colorColl) {
+    colorColl[obj].slider.oninput = () => {
+      colorColl[obj].part = colorColl[obj].slider.value;
+    }
   }
 }
 getColor();
