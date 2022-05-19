@@ -57,6 +57,14 @@ nav { /*Скрытый nav*/
   border-right: 1px black solid;
 }
 
+nav span {
+  width: 100%;
+  float:right;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
 nav:hover { /*Раскрытый nav*/
   width: 20%;
   height: 90%;
@@ -77,6 +85,10 @@ nav:hover ul { /*Параметры елемента списка в nav при 
   list-style: none;
   height:inherit;
   line-height: 250%;
+}
+
+nav:hover span {
+  display: none;
 }
 
 nav li { /*Параметры елемента списка в nav*/
