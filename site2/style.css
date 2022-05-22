@@ -175,6 +175,13 @@ nav:hover ~ main { /*Смена размера основной части пр�
   flex-direction:column;
   padding-right:0.5%;
   padding-top:0.5%;
+  border: solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 5px;
+  margin-right:0.5%;
+  margin-top:0.5%;
+  background-color: #bababa;
 }
 
 .slider {/*Свойства слайдера*/
