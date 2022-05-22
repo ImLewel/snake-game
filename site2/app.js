@@ -6,6 +6,7 @@ const faceExample = document.querySelector('#faceExample');
 const tileExample = document.querySelector('#tileExample');
 const score = document.getElementById('score');
 const record = document.getElementById('record');
+const wins = document.getElementById('wins');
 const context = canvas.getContext('2d');
 const faceSlider = document.getElementById('faceSlider');
 const tileSlider = document.getElementById('tileSlider');
@@ -19,6 +20,7 @@ const roomData = {
   height: 384,
   scoreCount: 0,
   recordCount: 0,
+  winsCount: 0,
   bonus: 0,
 }
 
@@ -64,6 +66,7 @@ const gameLoop = () => {
     drawBerry();
     score.innerHTML = `Your current score is ${roomData.scoreCount}`;
     record.innerHTML = `Your record was ${roomData.recordCount}`;
+    wins.innerHTML = `Wins: ${roomData.winsCount}`;
   }
 }
 requestAnimationFrame(gameLoop);
@@ -232,4 +235,10 @@ pauseBtn.onclick = () => {
 }
 
 restartBtn.onclick = () => refreshGame();
+
+const checkWin = () => {
+  if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
+    roomData.winsCount++;
+  }
+}
 
