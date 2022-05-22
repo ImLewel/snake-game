@@ -204,18 +204,19 @@ const getFieldWidth = () => {
 }
 getFieldWidth();
 
-let cases = [[faceSlider, faceExample, 'faces'],[tileSlider, tileExample, 'tiles']];
-const getCustoms = () => {
-  for (let elem of cases) {
-    elem[0].oninput = () => {
-      elem[1].src = `./${elem[2]}/${elem[2].substring(0,4) + elem[0].value}.png`; // i.e. './faces/face0.png'
-    }    
+const tileColl = [{slider: faceSlider, ex: faceExample, name: 'faces'},
+ {slider: tileSlider, ex: tileExample, name: 'tiles'}];
+const getCustoms = (coll) => {
+  for (let obj of coll) {
+    obj.slider.oninput = () => {
+      obj.ex.src = `./${obj.name}/${obj.name.substring(0,4) + obj.slider.value}.png`;
+    }
   }
 }
-getCustoms();
+getCustoms(tileColl);
 
 const mapTiler = () => {
-  const pattern = context.createPattern(tileExample, 'repeat');
+  const pattern = context.createPattern(tileColl[1].ex, 'repeat');
   context.fillStyle = pattern;
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
