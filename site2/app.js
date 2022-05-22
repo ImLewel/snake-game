@@ -152,21 +152,24 @@ const collisionBorder = () => {
 
 let keybrdPressFlag = false;
 const keysColl = {
-  w: ["KeyW", 0, -snake.stepSize],
-  s: ["KeyS", 0,  snake.stepSize],
-  a: ["KeyA", -snake.stepSize, 0],
-  d: ["KeyD",  snake.stepSize, 0],
+  w: {key: "KeyW", dirX: 0, dirY: -snake.stepSize},
+  s: {key: "KeyS", dirX: 0, dirY: snake.stepSize},
+  a: {key: "KeyA", dirX: -snake.stepSize, dirY: 0},
+  d: {key: "KeyD", dirX: snake.stepSize, dirY: 0},
 }
 
-document.addEventListener("keydown", e => {
-  for (const key in keysColl) {
-    if (e.code == keysColl[key][0]) {
-      snake.dirX = keysColl[key][1];
-      snake.dirY = keysColl[key][2];
-      keybrdPressFlag = true;
+const control = (coll) => {
+  document.addEventListener("keydown", e => {
+    for (const letter in coll) {
+      if (e.code == coll[letter].key) {
+        snake.dirX = coll[letter].dirX;
+        snake.dirY = coll[letter].dirY;
+        keybrdPressFlag = true;
+      }
     }
-  }
-});
+  })
+}
+control(keysColl);
 
 const colorColl = {
   head: {slider: headColor, part: null},
