@@ -9,6 +9,8 @@ const record = document.getElementById('record');
 const context = canvas.getContext('2d');
 const faceSlider = document.getElementById('faceSlider');
 const tileSlider = document.getElementById('tileSlider');
+const pauseBtn = document.getElementById('pauseBtn');
+const restartBtn = document.getElementById('restartBtn');
 
 const roomData = {
   step: 0,
@@ -52,16 +54,17 @@ const getRandomInt = (min, max) => {
 }
 
 const gameLoop = () => {
-  requestAnimationFrame(gameLoop);
-
-  if (++roomData.step < roomData.maxStep) return;
-  roomData.step = 0;
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  mapTiler();
-  drawSnake();
-  drawBerry();
-  score.innerHTML = `Your current score is ${roomData.scoreCount}`;
-  record.innerHTML = `Your record was ${roomData.recordCount}`;
+    requestAnimationFrame(gameLoop);
+    if (!isPaused){
+    if (++roomData.step < roomData.maxStep) return;
+    roomData.step = 0;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    mapTiler();
+    drawSnake();
+    drawBerry();
+    score.innerHTML = `Your current score is ${roomData.scoreCount}`;
+    record.innerHTML = `Your record was ${roomData.recordCount}`;
+  }
 }
 requestAnimationFrame(gameLoop);
 
@@ -213,3 +216,20 @@ const mapTiler = () => {
   context.fillStyle = pattern;
   context.fillRect(0, 0, canvas.width, canvas.height);
 }
+
+let isPaused = false;
+const pauseIco = './icons/pause.png';
+const continueIco = './icons/continue.png';
+pauseBtn.onclick = () => {
+  if (!isPaused) {
+    isPaused = true;
+    pauseBtn.src = continueIco;
+  }
+  else {
+    isPaused = false;
+    pauseBtn.src = pauseIco;
+  }
+}
+
+restartBtn.onclick = () => refreshGame();
+
