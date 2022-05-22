@@ -239,6 +239,7 @@ restartBtn.onclick = () => refreshGame();
 const checkWin = () => {
   if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
     roomData.winsCount++;
+    refreshGame();
   }
 }
 
