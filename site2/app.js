@@ -64,8 +64,8 @@ const gameLoop = () => {
     mapTiler();
     drawSnake();
     drawBerry();
-    score.innerHTML = `Your current score is ${roomData.scoreCount}`;
-    record.innerHTML = `Your record was ${roomData.recordCount}`;
+    score.innerHTML = `Score: ${roomData.scoreCount}`;
+    record.innerHTML = `Best score: ${roomData.recordCount}`;
     wins.innerHTML = `Wins: ${roomData.winsCount}`;
   }
 }
