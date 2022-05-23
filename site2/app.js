@@ -178,7 +178,7 @@ const colorColl = {
 }
 
 const getColor = () => {
-  for (let obj in colorColl) {
+  for (const obj in colorColl) {
     colorColl[obj].slider.oninput = () => {
       colorColl[obj].part = colorColl[obj].slider.value;
     }
@@ -187,7 +187,7 @@ const getColor = () => {
 getColor();
 
 const getFieldWidth = () => {
-  for (let elem of widthSelector) {
+  for (const elem of widthSelector) {
     elem.onclick = () => {
       if (!keybrdPressFlag) {
         if (Array.from(widthSelector).indexOf(elem) === 0) {
@@ -211,7 +211,7 @@ getFieldWidth();
 const tileColl = [{slider: faceSlider, ex: faceExample, name: 'faces'},
  {slider: tileSlider, ex: tileExample, name: 'tiles'}];
 const getCustoms = (coll) => {
-  for (let obj of coll) {
+  for (const obj of coll) {
     obj.slider.oninput = () => {
       obj.ex.src = `./${obj.name}/${obj.name.substring(0,4) + obj.slider.value}.png`;
     }
