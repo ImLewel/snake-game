@@ -233,8 +233,10 @@ nav:hover ~ main { /*Смена размера основной части пр�
   }
 
   #controlsWrapper{
+    margin-top: 1%;
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: repeat(3, 80px), auto;
+    grid-template-columns: 80px 196px;
   }
 
   #controlsWrapper > #dataField{
@@ -249,6 +251,22 @@ nav:hover ~ main { /*Смена размера основной части пр�
 
   #pauseRestartWrapper{
     flex-direction: column;
+  }
+
+  #pauseRestartWrapper > *{
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+
+  #mobController {
+    position: inherit;
+    display: grid;
+    grid-template-columns: repeat(3, 64px);
+    grid-template-rows: repeat(3, 64px);
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
   }
 }
 

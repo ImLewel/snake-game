@@ -14,9 +14,13 @@ const pauseBtn = document.getElementById('pauseBtn');
 const restartBtn = document.getElementById('restartBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsMenu = document.getElementById('dataField');
+const mobController = document.getElementById('mobController');
+const arrows = document.querySelectorAll('.arrow');
 const mainElement = document.getElementById('main');
 const OS = navigator.userAgentData.platform;
 settingsMenu.style.display = 'none';
+mobController.style.display = 'none';
+
 const roomData = {
   step: 0,
   maxStep: 10,
@@ -45,9 +49,11 @@ const getCanvasDimensions = () => {
 }
 
 const maxMobRes = {width: 500, height: 900}
+let arrowsShown = false;
 const mobCanvasSize = [224, 176];
-if ((OS === 'Android' || OS === 'iOS') && window.innerWidth <= maxMobRes.width) {
+if ((OS === 'Android' || OS === 'iOS' || OS === 'Windows') && window.innerWidth <= maxMobRes.width) {
   getCanvasDimensions();
+  arrowsShown = true;
 }
 
 canvas.width = roomData.width;
@@ -173,6 +179,13 @@ const keysColl = {
   d: {key: "KeyD", dirX: snake.stepSize, dirY: 0},
 }
 
+const mobileArrows = {
+  up: {id: "up", dirX: 0, dirY: -snake.stepSize},
+  down: {id: "down", dirX: 0, dirY: snake.stepSize},
+  left: {id: "left", dirX: -snake.stepSize, dirY: 0},
+  right: {id: "right", dirX: snake.stepSize, dirY: 0},
+}
+
 const control = (coll) => {
   document.addEventListener("keydown", e => {
     for (const letter in coll) {
@@ -185,6 +198,25 @@ const control = (coll) => {
   })
 }
 control(keysColl);
+
+const mobileInput = (coll) => {
+  for (const arrow of arrows) {
+    arrow.onclick = () => {
+      for (const elem in coll) {
+        if (coll[elem].id === arrow.id) {
+          snake.dirX = coll[elem].dirX;
+          snake.dirY = coll[elem].dirY;
+          keybrdPressFlag = true;
+        }
+      }
+    }
+  }
+}
+
+if (arrowsShown === true) {
+  mobController.style.display = '';
+  mobileInput(mobileArrows);
+}
 
 const colorColl = {
   head: {slider: headColor, part: null},
@@ -265,7 +297,7 @@ const checkWin = () => {
 let settingsOpened = false;
 settingsBtn.onclick = () => {
   if (settingsOpened === false) {
-    settingsMenu.style.display = 'initial';
+    settingsMenu.style.display = '';
     settingsOpened = true;
   }
   else {
