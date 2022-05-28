@@ -233,8 +233,8 @@ nav:hover ~ main { /*Смена размера основной части пр�
   }
 
   #controlsWrapper{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: auto auto auto;
   }
 
   #controlsWrapper > #dataField{
@@ -247,6 +247,9 @@ nav:hover ~ main { /*Смена размера основной части пр�
     grid-template-columns: auto auto auto;
   }
 
+  #pauseRestartWrapper{
+    flex-direction: column;
+  }
 }
 
 .slider {/*Свойства слайдера*/

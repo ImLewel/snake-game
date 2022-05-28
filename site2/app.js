@@ -12,9 +12,11 @@ const faceSlider = document.getElementById('faceSlider');
 const tileSlider = document.getElementById('tileSlider');
 const pauseBtn = document.getElementById('pauseBtn');
 const restartBtn = document.getElementById('restartBtn');
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsMenu = document.getElementById('dataField');
 const mainElement = document.getElementById('main');
 const OS = navigator.userAgentData.platform;
-
+settingsMenu.style.display = 'none';
 const roomData = {
   step: 0,
   maxStep: 10,
@@ -257,6 +259,18 @@ const checkWin = () => {
   if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
     roomData.winsCount++;
     refreshGame();
+  }
+}
+
+let settingsOpened = false;
+settingsBtn.onclick = () => {
+  if (settingsOpened === false) {
+    settingsMenu.style.display = 'initial';
+    settingsOpened = true;
+  }
+  else {
+    settingsMenu.style.display = 'none';
+    settingsOpened = false;
   }
 }
 
