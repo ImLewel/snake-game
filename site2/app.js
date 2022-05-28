@@ -12,6 +12,8 @@ const faceSlider = document.getElementById('faceSlider');
 const tileSlider = document.getElementById('tileSlider');
 const pauseBtn = document.getElementById('pauseBtn');
 const restartBtn = document.getElementById('restartBtn');
+const mainElement = document.getElementById('main');
+const OS = navigator.userAgentData.platform;
 
 const roomData = {
   step: 0,
@@ -24,11 +26,6 @@ const roomData = {
   bonus: 0,
 }
 
-canvas.width = roomData.width;
-canvas.height = roomData.height;
-canvas.style.width = `${roomData.width}px`;
-canvas.style.height = `${roomData.height}px`;
-
 const snake = {
   sizeCell: 16,
   x: 160,
@@ -40,6 +37,21 @@ const snake = {
   maxTails: 20,
   face: null,
 }
+
+const getCanvasDimensions = () => {
+  [roomData.width, roomData.height] = mobCanvasSize;
+}
+
+const maxMobRes = {width: 500, height: 900}
+const mobCanvasSize = [224, 176];
+if ((OS === 'Android' || OS === 'iOS') && window.innerWidth <= maxMobRes.width) {
+  getCanvasDimensions();
+}
+
+canvas.width = roomData.width;
+canvas.height = roomData.height;
+canvas.style.width = `${roomData.width}px`;
+canvas.style.height = `${roomData.height}px`;
 
 const berry = {
   x: 0,
