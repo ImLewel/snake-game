@@ -149,8 +149,8 @@ nav:hover ~ main { /*Смена размера основной части пр�
   display: grid;
   position:relative;
   grid-template-columns: 130px 130px;
-  padding-top:15px;
-  padding-bottom:15px;
+  padding-top:1%;
+  padding-bottom:1%;
 }
 
 #buttonWrapper > .fieldSizeBtn { /*Кнопки размера поля внутри обертки*/
@@ -182,6 +182,71 @@ nav:hover ~ main { /*Смена размера основной части пр�
   margin-right:0.5%;
   margin-top:0.5%;
   background-color: #bababa;
+}
+
+#pauseRestartWrapper{
+  display: flex;
+  flex-direction: row;
+  width: max-content;
+}
+
+#pauseRestartWrapper > * {
+  width: 64px;
+  height: 64px;
+  padding-top: 0.5%;
+  cursor: pointer;
+  margin-left: 0.5%;
+}
+
+#scores{
+  display: grid;
+  grid-template-rows: auto auto auto;
+}
+
+#scores > * {
+  font-weight: bold;
+  text-align:center;
+  padding-bottom:1%;
+}
+
+@media screen and (min-width: 300px) and (max-width: 500px) {
+  body{
+    font-size: 1.5vw;
+  }
+
+  footer{
+    height: 1%;
+  }
+
+  header{
+    height: 1%;
+  }
+
+  main{
+    height: 99%;
+    top:1%;
+  }
+
+  nav{
+    height: 99%;
+    top:1%;
+  }
+
+  #controlsWrapper{
+    display: flex;
+    flex-direction: row;
+  }
+
+  #controlsWrapper > #dataField{
+    position: inherit;
+    margin-left: 0.5%;
+  }
+
+  #dataField > #scores{
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+
 }
 
 .slider {/*Свойства слайдера*/
