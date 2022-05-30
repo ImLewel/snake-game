@@ -50,7 +50,7 @@ const getCanvasDimensions = () => {
 
 const maxMobRes = {width: 500, height: 900}
 let arrowsShown = false;
-const mobCanvasSize = [224, 176];
+const mobCanvasSize = [224, 192];
 if ((OS === 'Android' || OS === 'iOS' || OS === 'Windows') && window.innerWidth <= maxMobRes.width) {
   getCanvasDimensions();
   arrowsShown = true;
