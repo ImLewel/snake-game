@@ -117,11 +117,13 @@ const drawSnake = () => {
 }
 
 const setSnakeColor = (cell) => {
-  if (cell === head) 
+  if (cell === head) {
     context.fillStyle = colorColl.head.part || headColor.value;
-  else
+  }
+  else {
    context.fillStyle = colorColl.body.part || bodyColor.value;
-  context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
+  }
+   context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 }
 
 const checkBerryCollision = (cell) => {
