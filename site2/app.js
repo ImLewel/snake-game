@@ -138,10 +138,8 @@ const checkBerryCollision = (cell) => {
 }
 
 const checkSelfCollision = (head, cell) => {
-  if (head != cell){
-    isSelfCollided = [head.x, head.y] === [cell.x, cell.y] ? true : false;
-  } 
-  if (isSelfCollided) refreshGame();
+  const isSelfCollided = head != cell && head.x === cell.x && head.y === cell.y;
+  if(isSelfCollided) refreshGame();
 }
 
 const refreshGame = () => {
