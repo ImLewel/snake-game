@@ -17,7 +17,7 @@ const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const arrows = document.querySelectorAll('.arrow');
 const mainElement = document.getElementById('main');
-const OS = navigator.userAgentData.platform;
+const currOS = navigator.userAgentData.platform;
 settingsMenu.style.display = 'none';
 mobController.style.display = 'none';
 
@@ -51,9 +51,16 @@ const getCanvasDimensions = () => {
 const maxMobRes = {width: 500, height: 900}
 let arrowsShown = false;
 const mobCanvasSize = [224, 192];
-if ((OS === 'Android' || OS === 'iOS' || OS === 'Windows') && window.innerWidth <= maxMobRes.width) {
-  getCanvasDimensions();
-  arrowsShown = true;
+const osColl = {
+  android: 'Android',
+  ios: 'iOS',
+  win: 'Windows',
+}
+for (const os in osColl) {
+  if ((currOS === osColl[os]) && window.innerWidth <= maxMobRes.width) {
+    getCanvasDimensions();
+    arrowsShown = true;
+  }
 }
 
 canvas.width = roomData.width;
