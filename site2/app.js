@@ -121,10 +121,10 @@ const drawSnake = () => {
 
 const setSnakeColor = (cell) => {
   if (cell === head) {
-    context.fillStyle = colorColl.head.part || headColor.value;
+    context.fillStyle = colorColl.head.color || headColor.value;
   }
   else {
-   context.fillStyle = colorColl.body.part || bodyColor.value;
+   context.fillStyle = colorColl.body.color || bodyColor.value;
   }
    context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 }
@@ -242,14 +242,14 @@ if (arrowsShown === true) {
 }
 
 const colorColl = {
-  head: {slider: headColor, part: null},
-  body: {slider: bodyColor, part: null},
+  head: {slider: headColor, color: null},
+  body: {slider: bodyColor, color: null},
 }
 
 const getColor = () => {
   for (const obj in colorColl) {
     colorColl[obj].slider.oninput = () => {
-      colorColl[obj].part = colorColl[obj].slider.value;
+      colorColl[obj].color = colorColl[obj].slider.value;
     }
   }
 }
