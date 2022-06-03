@@ -299,16 +299,18 @@ const mapTiler = () => {
 }
 
 let isPaused = false;
-const pauseIco = './icons/pause.png';
-const continueIco = './icons/continue.png';
+const playIcons = {
+  play: './icons/continue.png',
+  pause: './icons/pause.png',
+}
 pauseBtn.onclick = () => {
   if (!isPaused) {
     isPaused = true;
-    pauseBtn.src = continueIco;
+    pauseBtn.src = playIcons.play;
   }
   else {
     isPaused = false;
-    pauseBtn.src = pauseIco;
+    pauseBtn.src = playIcons.pause;
   }
 }
 
