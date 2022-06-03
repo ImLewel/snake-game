@@ -18,7 +18,6 @@ const mobController = document.getElementById('mobController');
 const arrows = document.querySelectorAll('.arrow');
 const mainElement = document.getElementById('main');
 const currOS = navigator.userAgentData.platform;
-settingsMenu.style.display = 'none';
 mobController.style.display = 'none';
 
 const roomData = {
@@ -31,6 +30,7 @@ const roomData = {
   winsCount: 0,
   avaliableBonus: {small: 1, big: 2},
   currBonus: 0,
+  settingsOpened: true,
 }
 
 const snake = {
@@ -61,6 +61,8 @@ for (const os in osColl) {
   if ((currOS === osColl[os]) && window.innerWidth <= maxMobRes.width) {
     getCanvasDimensions();
     arrowsShown = true;
+    roomData.settingsOpened = false;
+    settingsMenu.style.display = 'none';
   }
 }
 
@@ -253,27 +255,31 @@ const getColor = () => {
 }
 getColor();
 
-const getFieldWidth = () => {
-  for (const elem of widthSelector) {
-    elem.onclick = () => {
+const widthBtnIds = {
+  normal: 'normal',
+  wide: 'wide',
+}
+const getFieldWidth = (multX, multY) => {
+  for (const btn of widthSelector) {
+    btn.onclick = () => {
       if (!keybrdPressFlag) {
-        if (Array.from(widthSelector).indexOf(elem) === 0) {
+        if (btn.id === widthBtnIds.normal) {
           canvas.width = roomData.width;
           canvas.height = roomData.height;
           canvas.style.width = `${roomData.width}px`;
           canvas.style.height = `${roomData.height}px`;
         }
         else {
-          canvas.width = roomData.width * 1.5;
-          canvas.height = roomData.height * 1.25;
-          canvas.style.width = `${roomData.width * 1.5}px`;
-          canvas.style.height = `${roomData.height * 1.25}px`;
+          canvas.width = roomData.width * multX;
+          canvas.height = roomData.height * multY;
+          canvas.style.width = `${roomData.width * multX}px`;
+          canvas.style.height = `${roomData.height * multY}px`;
         }
       }
     }
   }
 }
-getFieldWidth();
+getFieldWidth(1.5, 1.25);
 
 const tileColl = [{slider: faceSlider, ex: faceExample, name: 'faces'},
  {slider: tileSlider, ex: tileExample, name: 'tiles'}];
@@ -315,15 +321,14 @@ const checkWin = () => {
   }
 }
 
-let settingsOpened = false;
 settingsBtn.onclick = () => {
-  if (settingsOpened === false) {
+  if (roomData.settingsOpened === false) {
     settingsMenu.style.display = '';
-    settingsOpened = true;
+    roomData.settingsOpened = true;
   }
   else {
     settingsMenu.style.display = 'none';
-    settingsOpened = false;
+    roomData.settingsOpened = false;
   }
 }
 
