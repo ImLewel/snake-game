@@ -29,7 +29,8 @@ const roomData = {
   scoreCount: 0,
   recordCount: 0,
   winsCount: 0,
-  bonus: 0,
+  avaliableBonus: {small: 1, big: 2},
+  currBonus: 0,
 }
 
 const snake = {
@@ -128,11 +129,17 @@ const setSnakeColor = (cell) => {
 
 const checkBerryCollision = (cell) => {
   if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
-    if (berry.sizeBerry === berry.avaliableSize.small) roomData.bonus = 1;
-    else roomData.bonus = 2;
-    if (roomData.scoreCount >= roomData.recordCount) roomData.recordCount+=roomData.bonus;
-    roomData.scoreCount+=roomData.bonus;
-    snake.maxTails+=roomData.bonus;
+    if (berry.sizeBerry === berry.avaliableSize.small) {
+      roomData.currBonus = roomData.avaliableBonus.small;
+    }
+    else {
+      roomData.currBonus = roomData.avaliableBonus.big;
+    }
+    if (roomData.scoreCount >= roomData.recordCount) {
+     roomData.recordCount+=roomData.currBonus;
+    }
+    roomData.scoreCount += roomData.currBonus;
+    snake.maxTails += roomData.currBonus;
     berryPos();
   }
 }
