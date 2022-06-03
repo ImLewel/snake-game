@@ -71,7 +71,7 @@ canvas.style.height = `${roomData.height}px`;
 const berry = {
   x: 0,
   y: 0,
-  avaliableSize: [8, 8, 8, 16],
+  avaliableSize: {small: 8, big: 16},
   sizeBerry: 8,
 }
 
@@ -128,7 +128,7 @@ const setSnakeColor = (cell) => {
 
 const checkBerryCollision = (cell) => {
   if (cell.x + indent == berry.x && cell.y + indent == berry.y) {
-    if (berry.sizeBerry === berry.avaliableSize[0]) roomData.bonus = 1;
+    if (berry.sizeBerry === berry.avaliableSize.small) roomData.bonus = 1;
     else roomData.bonus = 2;
     if (roomData.scoreCount >= roomData.recordCount) roomData.recordCount+=roomData.bonus;
     roomData.scoreCount+=roomData.bonus;
@@ -159,9 +159,13 @@ const drawBerry = () => {
   context.fillRect(berry.x, berry.y, berry.sizeBerry, berry.sizeBerry);
 }
 
+const smallBerryChance = 0.75;
 const berryPos = () => {
-  let index = getRandomInt(0, berry.avaliableSize.length - 1);
-  berry.sizeBerry = berry.avaliableSize[index];
+  const currChance = Math.random();
+  if (currChance <= smallBerryChance) {
+    berry.sizeBerry = berry.avaliableSize.small;
+  }
+  else berry.sizeBerry = berry.avaliableSize.big;
   indent = align();
   berry.x = getRandomPos(canvas.width);
   berry.y = getRandomPos(canvas.height);
