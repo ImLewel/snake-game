@@ -91,12 +91,15 @@ const align = () => ((snake.sizeCell - berry.sizeBerry) / 2);
 let indent;
 
 const randInt = (min, max) => {
-  Math.round(Math.random() * (max - min) + min);
+  return Math.round(Math.random() * (max - min) + min);
 };
 
 const randPos = (dimension) => {
-  const pos = ((randInt(0, (dimension - snake.sizeCell) / snake.sizeCell) * snake.sizeCell) + indent);
-  return pos;
+  indent = align();
+  const tileNum = randInt(0, (dimension - snake.sizeCell) / snake.sizeCell);
+  const tilePos = tileNum * snake.sizeCell;
+  const truePos = tilePos + indent;
+  return truePos;
 };
 
 let isPaused = false;
@@ -121,7 +124,6 @@ const berryPos = () => {
     berry.sizeBerry = berry.avaliableSize.small;
   }
   else berry.sizeBerry = berry.avaliableSize.big;
-  indent = align();
   berry.x = randPos(canvas.width);
   berry.y = randPos(canvas.height);
 };
