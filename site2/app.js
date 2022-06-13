@@ -293,14 +293,16 @@ const drawSnake = () => {
   snake.x += snake.dirX;
   snake.y += snake.dirY;
   collisionBorder();
-  if (faceSlider.value !== 0) snake.face = faceExample;
+  if (parseInt(faceSlider.value) !== 0) snake.face = faceExample;
   else snake.face = null;
   snake.tails.unshift({ x: snake.x, y: snake.y });
   snake.head = snake.tails[0];
   if (snake.tails.length > snake.maxTails) snake.tails.pop();
   for (const cell of snake.tails) {
     setSnakeColor(cell);
-    if (snake.face != null) context.drawImage(snake.face, snake.head.x, snake.head.y);
+    if (snake.face !== null) {
+      context.drawImage(snake.face, snake.head.x, snake.head.y);
+    }
     checkBerryCollision(cell);
     if (keybrdPressFlag) checkSelfCollision(snake.head, cell);
   }
