@@ -1,3 +1,4 @@
+'use strict';
 const myAudio = new Audio('./music/ambientMusic.mp3');
 const musicSlider = document.querySelector('#musicSlider');
 const musicPic = document.querySelector('#musicPic');

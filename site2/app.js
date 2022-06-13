@@ -1,3 +1,4 @@
+'use strict';
 const canvas = document.getElementById('game-canvas');
 const widthSelector = document.querySelectorAll('.fieldSizeBtn');
 const headColor = document.querySelector('#headColor');
