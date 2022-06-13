@@ -47,18 +47,20 @@ const snake = {
   face: null,
 };
 
-const getCanvasDimensions = () => {
-  [roomData.width, roomData.height] = mobCanvasSize;
-};
-
-const maxMobRes = { width: 500, height: 900 };
-let arrowsShown = false;
-const mobCanvasSize = [224, 192];
 const osColl = {
   android: 'Android',
   ios: 'iOS',
   win: 'Windows',
 };
+
+const mobCanvasSize = [224, 192];
+const maxMobRes = { width: 500, height: 900 };
+let arrowsShown = false;
+
+const getCanvasDimensions = () => {
+  [roomData.width, roomData.height] = mobCanvasSize;
+};
+
 for (const os in osColl) {
   if ((currOS === osColl[os]) && window.innerWidth <= maxMobRes.width) {
     getCanvasDimensions();
