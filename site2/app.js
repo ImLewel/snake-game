@@ -217,27 +217,25 @@ if (arrowsShown === true) {
   mobileInput(mobileArrows);
 }
 
-const getFieldWidth = (multX, multY) => {
-  for (const btn of widthSelector) {
-    btn.onclick = () => {
-      if (!keybrdPressFlag) {
+const getFieldWidth = (normalMult, multX, multY) => {
+  if (!keybrdPressFlag) {
+    for (const btn of widthSelector) {
+      let currMultX = multX;
+      let currMultY = multY;
+      btn.onclick = () => {
         if (btn.id === widthBtnIds.normal) {
-          canvas.width = roomData.width;
-          canvas.height = roomData.height;
-          canvas.style.width = `${roomData.width}px`;
-          canvas.style.height = `${roomData.height}px`;
+          currMultX = normalMult;
+          currMultY = normalMult;
         }
-        else {
-          canvas.width = roomData.width * multX;
-          canvas.height = roomData.height * multY;
-          canvas.style.width = `${roomData.width * multX}px`;
-          canvas.style.height = `${roomData.height * multY}px`;
-        }
-      }
+        canvas.width = roomData.width * currMultX;
+        canvas.height = roomData.height * currMultY;
+        canvas.style.width = `${roomData.width * currMultX}px`;
+        canvas.style.height = `${roomData.height * currMultY}px`;
+      };
     }
   }
 };
-getFieldWidth(1.5, 1.25);
+getFieldWidth(1, 1.5, 1.25);
 
 const refreshGame = () => {
   snake.x = 160;
