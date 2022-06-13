@@ -133,7 +133,9 @@ const tileColl = [{ slider: faceSlider, ex: faceExample, name: 'faces' },
 const getCustoms = (coll) => {
   for (const obj of coll) {
     obj.slider.oninput = () => {
-      obj.ex.src = `./${obj.name}/${obj.name.slice(0,4) + obj.slider.value}.png`;
+      const dir = obj.name;
+      const subDir = obj.name.slice(0, 4);
+      obj.ex.src = `./${dir}/${subDir + obj.slider.value}.png`;
     };
   }
 };
