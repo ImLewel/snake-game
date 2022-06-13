@@ -269,8 +269,8 @@ const collisionBorder = () => {
 };
 
 const checkSelfCollision = (head, cell) => {
-  const isSelfCollided = head != cell && head.x === cell.x && head.y === cell.y;
-  if (isSelfCollided) refreshGame();
+  const selfCollided = head !== cell && head.x === cell.x && head.y === cell.y;
+  if (selfCollided) refreshGame();
 };
 
 const checkBerryCollision = (cell) => {
