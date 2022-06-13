@@ -122,8 +122,7 @@ const berryPos = () => {
   const currChance = Math.random();
   if (currChance <= smallBerryChance) {
     berry.sizeBerry = berry.avaliableSize.small;
-  }
-  else berry.sizeBerry = berry.avaliableSize.big;
+  } else berry.sizeBerry = berry.avaliableSize.big;
   berry.x = randPos(canvas.width);
   berry.y = randPos(canvas.height);
 };
@@ -135,7 +134,7 @@ const getCustoms = (coll) => {
   for (const obj of coll) {
     obj.slider.oninput = () => {
       obj.ex.src = `./${obj.name}/${obj.name.slice(0,4) + obj.slider.value}.png`;
-    }
+    };
   }
 };
 getCustoms(tileColl);
@@ -178,14 +177,14 @@ const keysColl = {
 };
 
 const mobileArrows = {
-  up: {id: 'up', dirX: 0, dirY: -snake.stepSize},
-  down: {id: 'down', dirX: 0, dirY: snake.stepSize},
-  left: {id: 'left', dirX: -snake.stepSize, dirY: 0},
-  right: {id: 'right', dirX: snake.stepSize, dirY: 0},
+  up: { id: 'up', dirX: 0, dirY: -snake.stepSize },
+  down: { id: 'down', dirX: 0, dirY: snake.stepSize },
+  left: { id: 'left', dirX: -snake.stepSize, dirY: 0 },
+  right: { id: 'right', dirX: snake.stepSize, dirY: 0 },
 };
 
 const control = (coll) => {
-  document.addEventListener('keydown', e => {
+  document.addEventListener('keydown', (e) => {
     for (const letter in coll) {
       if (e.code === coll[letter].key) {
         snake.dirX = coll[letter].dirX;
@@ -193,7 +192,7 @@ const control = (coll) => {
         keybrdPressFlag = true;
       }
     }
-  })
+  });
 };
 control(keysColl);
 
