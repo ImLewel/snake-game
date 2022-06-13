@@ -75,6 +75,11 @@ canvas.height = roomData.height;
 canvas.style.width = `${roomData.width}px`;
 canvas.style.height = `${roomData.height}px`;
 
+const widthBtnIds = {
+  normal: 'normal',
+  wide: 'wide',
+};
+
 const berry = {
   x: 0,
   y: 0,
@@ -89,85 +94,24 @@ const getRandomInt = (min, max) => {
   Math.round(Math.random() * (max - min) + min);
 };
 
-const gameLoop = () => {
-  requestAnimationFrame(gameLoop);
+const getRandomPos = (dimension) => {
+  const pos = ((getRandomInt(0, (dimension - snake.sizeCell) / snake.sizeCell) * snake.sizeCell) + indent);
+  return pos;
+};
+
+let isPaused = false;
+const playIcons = {
+  play: './icons/continue.png',
+  pause: './icons/pause.png',
+};
+pauseBtn.onclick = () => {
   if (!isPaused) {
-    if (++roomData.step < roomData.maxStep) return;
-    roomData.step = 0;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    mapTiler();
-    drawSnake();
-    drawBerry();
-    checkWin();
-    score.innerHTML = `Score: ${roomData.scoreCount}`;
-    record.innerHTML = `Best score: ${roomData.recordCount}`;
-    wins.innerHTML = `Wins: ${roomData.winsCount}`;
-  }
-};
-requestAnimationFrame(gameLoop);
-
-const drawSnake = () => {
-  snake.x += snake.dirX;
-  snake.y += snake.dirY;
-  collisionBorder();
-  if (faceSlider.value !== 0) snake.face = faceExample;
-  else snake.face = null;
-  snake.tails.unshift({ x: snake.x, y: snake.y });
-  snake.head = snake.tails[0];
-  if (snake.tails.length > snake.maxTails) snake.tails.pop();
-  for (const cell of snake.tails) {
-    setSnakeColor(cell);
-    if (snake.face != null) context.drawImage(snake.face, snake.head.x, snake.head.y);
-    checkBerryCollision(cell);
-    if (keybrdPressFlag) checkSelfCollision(snake.head, cell);
-  }
-};
-
-const setSnakeColor = (cell) => {
-  if (cell === snake.head) {
-    context.fillStyle = colorColl.head.color || headColor.value;
+    isPaused = true;
+    pauseBtn.src = playIcons.play;
   } else {
-    context.fillStyle = colorColl.body.color || bodyColor.value;
+    isPaused = false;
+    pauseBtn.src = playIcons.pause;
   }
-  context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
-};
-
-const checkBerryCollision = (cell) => {
-  if (cell.x + indent === berry.x && cell.y + indent === berry.y) {
-    if (berry.sizeBerry === berry.avaliableSize.small) {
-      roomData.currBonus = roomData.avaliableBonus.small;
-    } else {
-      roomData.currBonus = roomData.avaliableBonus.big;
-    }
-    if (roomData.scoreCount >= roomData.recordCount) {
-      roomData.recordCount += roomData.currBonus;
-    }
-    roomData.scoreCount += roomData.currBonus;
-    snake.maxTails += roomData.currBonus;
-    berryPos();
-  }
-};
-
-const checkSelfCollision = (head, cell) => {
-  const isSelfCollided = head != cell && head.x === cell.x && head.y === cell.y;
-  if (isSelfCollided) refreshGame();
-};
-
-const refreshGame = () => {
-  snake.x = 160;
-  snake.y = 160;
-  snake.tails = [];
-  snake.maxTails = 20;
-  snake.dirX = 0;
-  snake.dirY = 0;
-  roomData.scoreCount = 0;
-  berryPos();
-  keybrdPressFlag = false;
-};
-
-const drawBerry = () => {
-  context.fillStyle = '#CF1B84';
-  context.fillRect(berry.x, berry.y, berry.sizeBerry, berry.sizeBerry);
 };
 
 const smallBerryChance = 0.75;
@@ -181,19 +125,46 @@ const berryPos = () => {
   berry.x = getRandomPos(canvas.width);
   berry.y = getRandomPos(canvas.height);
 };
-
-const getRandomPos = (dimension) => {
-  const pos = ((getRandomInt(0, (dimension - snake.sizeCell) / snake.sizeCell) * snake.sizeCell) + indent);
-  return pos;
-};
-
 berryPos();
 
-const collisionBorder = () => {
-  if (snake.x < 0) snake.x = canvas.width - snake.sizeCell;
-  else if (snake.x >= canvas.width) snake.x = 0;
-  if (snake.y < 0) snake.y = canvas.height - snake.sizeCell;
-  else if (snake.y >= canvas.height) snake.y = 0;
+const tileColl = [{ slider: faceSlider, ex: faceExample, name: 'faces' },
+  { slider: tileSlider, ex: tileExample, name: 'tiles' }];
+const getCustoms = (coll) => {
+  for (const obj of coll) {
+    obj.slider.oninput = () => {
+      obj.ex.src = `./${obj.name}/${obj.name.slice(0,4) + obj.slider.value}.png`;
+    }
+  }
+};
+getCustoms(tileColl);
+
+const colorColl = {
+  head: { slider: headColor, color: null },
+  body: { slider: bodyColor, color: null },
+};
+
+const getColor = () => {
+  for (const obj in colorColl) {
+    colorColl[obj].slider.oninput = () => {
+      colorColl[obj].color = colorColl[obj].slider.value;
+    };
+  }
+};
+getColor();
+
+const mapTiler = () => {
+  const pattern = context.createPattern(tileColl[1].ex, 'repeat');
+  context.fillStyle = pattern;
+  context.fillRect(0, 0, canvas.width, canvas.height);
+};
+
+const setSnakeColor = (cell) => {
+  if (cell === snake.head) {
+    context.fillStyle = colorColl.head.color || headColor.value;
+  } else {
+    context.fillStyle = colorColl.body.color || bodyColor.value;
+  }
+  context.fillRect(cell.x, cell.y, snake.sizeCell, snake.sizeCell);
 };
 
 let keybrdPressFlag = false;
@@ -243,24 +214,6 @@ if (arrowsShown === true) {
   mobileInput(mobileArrows);
 }
 
-const colorColl = {
-  head: { slider: headColor, color: null },
-  body: { slider: bodyColor, color: null },
-};
-
-const getColor = () => {
-  for (const obj in colorColl) {
-    colorColl[obj].slider.oninput = () => {
-      colorColl[obj].color = colorColl[obj].slider.value;
-    };
-  }
-};
-getColor();
-
-const widthBtnIds = {
-  normal: 'normal',
-  wide: 'wide',
-};
 const getFieldWidth = (multX, multY) => {
   for (const btn of widthSelector) {
     btn.onclick = () => {
@@ -283,46 +236,19 @@ const getFieldWidth = (multX, multY) => {
 };
 getFieldWidth(1.5, 1.25);
 
-const tileColl = [{ slider: faceSlider, ex: faceExample, name: 'faces' },
-  { slider: tileSlider, ex: tileExample, name: 'tiles' }];
-const getCustoms = (coll) => {
-  for (const obj of coll) {
-    obj.slider.oninput = () => {
-      obj.ex.src = `./${obj.name}/${obj.name.slice(0,4) + obj.slider.value}.png`;
-    }
-  }
-};
-getCustoms(tileColl);
-
-const mapTiler = () => {
-  const pattern = context.createPattern(tileColl[1].ex, 'repeat');
-  context.fillStyle = pattern;
-  context.fillRect(0, 0, canvas.width, canvas.height);
-};
-
-let isPaused = false;
-const playIcons = {
-  play: './icons/continue.png',
-  pause: './icons/pause.png',
-};
-pauseBtn.onclick = () => {
-  if (!isPaused) {
-    isPaused = true;
-    pauseBtn.src = playIcons.play;
-  } else {
-    isPaused = false;
-    pauseBtn.src = playIcons.pause;
-  }
+const refreshGame = () => {
+  snake.x = 160;
+  snake.y = 160;
+  snake.tails = [];
+  snake.maxTails = 20;
+  snake.dirX = 0;
+  snake.dirY = 0;
+  roomData.scoreCount = 0;
+  berryPos();
+  keybrdPressFlag = false;
 };
 
 restartBtn.onclick = () => refreshGame();
-
-const checkWin = () => {
-  if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
-    roomData.winsCount++;
-    refreshGame();
-  }
-};
 
 settingsBtn.onclick = () => {
   if (roomData.settingsOpened === false) {
@@ -333,4 +259,78 @@ settingsBtn.onclick = () => {
     roomData.settingsOpened = false;
   }
 };
+
+const collisionBorder = () => {
+  if (snake.x < 0) snake.x = canvas.width - snake.sizeCell;
+  else if (snake.x >= canvas.width) snake.x = 0;
+  if (snake.y < 0) snake.y = canvas.height - snake.sizeCell;
+  else if (snake.y >= canvas.height) snake.y = 0;
+};
+
+const checkSelfCollision = (head, cell) => {
+  const isSelfCollided = head != cell && head.x === cell.x && head.y === cell.y;
+  if (isSelfCollided) refreshGame();
+};
+
+const checkBerryCollision = (cell) => {
+  if (cell.x + indent === berry.x && cell.y + indent === berry.y) {
+    if (berry.sizeBerry === berry.avaliableSize.small) {
+      roomData.currBonus = roomData.avaliableBonus.small;
+    } else {
+      roomData.currBonus = roomData.avaliableBonus.big;
+    }
+    if (roomData.scoreCount >= roomData.recordCount) {
+      roomData.recordCount += roomData.currBonus;
+    }
+    roomData.scoreCount += roomData.currBonus;
+    snake.maxTails += roomData.currBonus;
+    berryPos();
+  }
+};
+
+const drawSnake = () => {
+  snake.x += snake.dirX;
+  snake.y += snake.dirY;
+  collisionBorder();
+  if (faceSlider.value !== 0) snake.face = faceExample;
+  else snake.face = null;
+  snake.tails.unshift({ x: snake.x, y: snake.y });
+  snake.head = snake.tails[0];
+  if (snake.tails.length > snake.maxTails) snake.tails.pop();
+  for (const cell of snake.tails) {
+    setSnakeColor(cell);
+    if (snake.face != null) context.drawImage(snake.face, snake.head.x, snake.head.y);
+    checkBerryCollision(cell);
+    if (keybrdPressFlag) checkSelfCollision(snake.head, cell);
+  }
+};
+
+const drawBerry = () => {
+  context.fillStyle = '#CF1B84';
+  context.fillRect(berry.x, berry.y, berry.sizeBerry, berry.sizeBerry);
+};
+
+const checkWin = () => {
+  if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
+    roomData.winsCount++;
+    refreshGame();
+  }
+};
+
+const gameLoop = () => {
+  requestAnimationFrame(gameLoop);
+  if (!isPaused) {
+    if (++roomData.step < roomData.maxStep) return;
+    roomData.step = 0;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    mapTiler();
+    drawSnake();
+    drawBerry();
+    checkWin();
+    score.innerHTML = `Score: ${roomData.scoreCount}`;
+    record.innerHTML = `Best score: ${roomData.recordCount}`;
+    wins.innerHTML = `Wins: ${roomData.winsCount}`;
+  }
+};
+requestAnimationFrame(gameLoop);
 
