@@ -87,7 +87,7 @@ let indent;
 
 const getRandomInt = (min, max) => {
   Math.round(Math.random() * (max - min) + min);
-}
+};
 
 const gameLoop = () => {
   requestAnimationFrame(gameLoop);
