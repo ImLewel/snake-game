@@ -217,7 +217,7 @@ if (arrowsShown === true) {
   mobileInput(mobileArrows);
 }
 
-const getFieldWidth = (normalMult, multX, multY) => {
+const setFieldSize = (normalMult, multX, multY) => {
   if (!keybrdPressFlag) {
     for (const btn of widthSelector) {
       let currMultX = multX;
@@ -235,7 +235,7 @@ const getFieldWidth = (normalMult, multX, multY) => {
     }
   }
 };
-getFieldWidth(1, 1.5, 1.25);
+setFieldSize(1, 1.5, 1.25);
 
 const refreshGame = () => {
   snake.x = 160;
