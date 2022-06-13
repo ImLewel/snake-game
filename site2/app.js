@@ -90,12 +90,12 @@ const berry = {
 const align = () => ((snake.sizeCell - berry.sizeBerry) / 2);
 let indent;
 
-const getRandomInt = (min, max) => {
+const randInt = (min, max) => {
   Math.round(Math.random() * (max - min) + min);
 };
 
-const getRandomPos = (dimension) => {
-  const pos = ((getRandomInt(0, (dimension - snake.sizeCell) / snake.sizeCell) * snake.sizeCell) + indent);
+const randPos = (dimension) => {
+  const pos = ((randInt(0, (dimension - snake.sizeCell) / snake.sizeCell) * snake.sizeCell) + indent);
   return pos;
 };
 
@@ -122,8 +122,8 @@ const berryPos = () => {
   }
   else berry.sizeBerry = berry.avaliableSize.big;
   indent = align();
-  berry.x = getRandomPos(canvas.width);
-  berry.y = getRandomPos(canvas.height);
+  berry.x = randPos(canvas.width);
+  berry.y = randPos(canvas.height);
 };
 berryPos();
 
