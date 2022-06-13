@@ -18,7 +18,6 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const arrows = document.querySelectorAll('.arrow');
-const mainElement = document.getElementById('main');
 const currOS = navigator.userAgentData.platform;
 mobController.style.display = 'none';
 
