@@ -90,9 +90,7 @@ const berry = {
 const align = () => ((snake.sizeCell - berry.sizeBerry) / 2);
 let indent;
 
-const randInt = (min, max) => {
-  return Math.round(Math.random() * (max - min) + min);
-};
+const randInt = (min, max) => Math.round(Math.random() * (max - min) + min);
 
 const randPos = (dimension) => {
   indent = align();
