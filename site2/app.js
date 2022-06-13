@@ -312,7 +312,10 @@ const drawBerry = () => {
 };
 
 const checkWin = () => {
-  if (snake.maxTails === (canvas.width / snake.sizeCell) * (canvas.height / snake.sizeCell)) {
+  const cellsByX = canvas.width / snake.sizeCell;
+  const cellsByY = canvas.height / snake.sizeCell;
+  const area = cellsByX * cellsByY;
+  if (snake.maxTails === area) {
     roomData.winsCount++;
     refreshGame();
   }
