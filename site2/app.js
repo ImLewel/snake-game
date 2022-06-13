@@ -83,7 +83,9 @@ const berry = {
 const align = () => ((snake.sizeCell - berry.sizeBerry) / 2);
 let indent;
 
-const getRandomInt = (min, max) => Math.round(Math.random() * (max - min) + min);
+const getRandomInt = (min, max) => {
+  Math.round(Math.random() * (max - min) + min);
+}
 
 const gameLoop = () => {
   requestAnimationFrame(gameLoop);
