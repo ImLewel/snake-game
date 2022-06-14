@@ -196,14 +196,16 @@ const control = (coll) => {
 };
 control(keysColl);
 
+const setFlag = () => keybrdPressFlag = true;
+
 const mobileInput = (coll) => {
   for (const arrow of arrows) {
     arrow.onclick = () => {
+      setFlag();
       for (const elem in coll) {
         if (coll[elem].id === arrow.id) {
           snake.dirX = coll[elem].dirX;
           snake.dirY = coll[elem].dirY;
-          keybrdPressFlag = true;
         }
       }
     };
