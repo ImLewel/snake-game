@@ -18,7 +18,7 @@ const settingsBtn = document.getElementById('settingsBtn');
 const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const arrows = document.querySelectorAll('.arrow');
-const currOS = navigator.userAgentData.platform;
+const UA = navigator.userAgent;
 mobController.style.display = 'none';
 
 const roomData = {
@@ -49,8 +49,11 @@ const snake = {
 
 const osColl = {
   android: 'Android',
-  ios: 'iOS',
-  win: 'Windows',
+  iPhone: 'iPhone',
+  iPad: 'iPad',
+  iPod: 'iPod',
+  blackBerry: 'BlackBerry',
+  operaMini: 'Opera Mini',
 };
 
 const mobCanvasSize = [224, 192];
@@ -62,7 +65,7 @@ const getCanvasDimensions = () => {
 };
 
 for (const os in osColl) {
-  if ((currOS === osColl[os]) && window.innerWidth <= maxMobRes.width) {
+  if (UA.match(osColl[os]) && window.innerWidth <= maxMobRes.width) {
     getCanvasDimensions();
     arrowsShown = true;
     roomData.settingsOpened = false;
