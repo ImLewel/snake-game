@@ -70,6 +70,7 @@ for (const os in osColl) {
     arrowsShown = true;
     roomData.settingsOpened = false;
     settingsMenu.style.display = 'none';
+    roomData.fps = 13;
   }
 }
 
