@@ -22,8 +22,8 @@ const UA = navigator.userAgent;
 mobController.style.display = 'none';
 
 const roomData = {
-  step: 0,
-  maxStep: 10,
+  fps: 17,
+  secInMilSec: 1000,
   width: 512,
   height: 384,
   scoreCount: 0,
@@ -327,19 +327,18 @@ const checkWin = () => {
 };
 
 const gameLoop = () => {
-  requestAnimationFrame(gameLoop);
-  if (!isPaused) {
-    if (++roomData.step < roomData.maxStep) return;
-    roomData.step = 0;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    mapTiler();
-    drawSnake();
-    drawBerry();
-    checkWin();
-    score.innerHTML = `Score: ${roomData.scoreCount}`;
-    record.innerHTML = `Best score: ${roomData.recordCount}`;
-    wins.innerHTML = `Wins: ${roomData.winsCount}`;
-  }
+  setInterval(() => {
+    if (!isPaused && document.hasFocus()) {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      mapTiler();
+      drawSnake();
+      drawBerry();
+      checkWin();
+      score.innerHTML = `Score: ${roomData.scoreCount}`;
+      record.innerHTML = `Best score: ${roomData.recordCount}`;
+      wins.innerHTML = `Wins: ${roomData.winsCount}`;
+    }
+  }, roomData.secInMilSec / roomData.fps);
 };
-requestAnimationFrame(gameLoop);
+gameLoop();
 
