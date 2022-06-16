@@ -29,7 +29,7 @@ const roomData = {
   scoreCount: 0,
   recordCount: 0,
   winsCount: 0,
-  avaliableBonus:  { small: 1, big: 2 },
+  avaliableBonus: { small: 1, big: 2 },
   currBonus: 0,
   settingsOpened: true,
 };
@@ -91,7 +91,7 @@ const berry = {
   sizeBerry: 8,
 };
 
-const align = () => ((snake.sizeCell - berry.sizeBerry) / 2);
+const align = () => (snake.sizeCell - berry.sizeBerry) / 2;
 let indent;
 
 const randInt = (min, max) => Math.round(Math.random() * (max - min) + min);
@@ -130,8 +130,10 @@ const berryPos = () => {
 };
 berryPos();
 
-const tileColl = [{ slider: faceSlider, ex: faceExample, name: 'faces' },
-  { slider: tileSlider, ex: tileExample, name: 'tiles' }];
+const tileColl = [
+  { slider: faceSlider, ex: faceExample, name: 'faces' },
+  { slider: tileSlider, ex: tileExample, name: 'tiles' },
+];
 const getCustoms = (coll) => {
   for (const obj of coll) {
     obj.slider.oninput = () => {
@@ -200,7 +202,7 @@ const control = (coll) => {
 };
 control(keysColl);
 
-const setFlag = () => keybrdPressFlag = true;
+const setFlag = () => (keybrdPressFlag = true);
 
 const mobileInput = (coll) => {
   for (const arrow of arrows) {
@@ -342,4 +344,3 @@ const gameLoop = () => {
   }, roomData.secInMilSec / roomData.fps);
 };
 gameLoop();
-
