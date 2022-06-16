@@ -19,7 +19,13 @@ const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const arrows = document.querySelectorAll('.arrow');
 const UA = navigator.userAgent;
-mobController.style.display = 'none';
+
+const displayStyles = {
+  shown: '',
+  none: 'none',
+};
+
+mobController.style.display = displayStyles.none;
 
 const roomData = {
   fps: 17,
@@ -69,7 +75,7 @@ for (const os of Object.keys(osColl)) {
     getCanvasDimensions();
     arrowsShown = true;
     roomData.settingsOpened = false;
-    settingsMenu.style.display = 'none';
+    settingsMenu.style.display = displayStyles.none;
     roomData.fps = 13;
   }
 }
@@ -219,7 +225,7 @@ const mobileInput = (coll) => {
 };
 
 if (arrowsShown === true) {
-  mobController.style.display = '';
+  mobController.style.display = displayStyles.shown;
   mobileInput(mobileArrows);
 }
 
@@ -259,10 +265,10 @@ restartBtn.onclick = () => refreshGame();
 
 settingsBtn.onclick = () => {
   if (roomData.settingsOpened === false) {
-    settingsMenu.style.display = '';
+    settingsMenu.style.display = displayStyles.shown;
     roomData.settingsOpened = true;
   } else {
-    settingsMenu.style.display = 'none';
+    settingsMenu.style.display = displayStyles.none;
     roomData.settingsOpened = false;
   }
 };
