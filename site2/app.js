@@ -64,7 +64,7 @@ const getCanvasDimensions = () => {
   [roomData.width, roomData.height] = mobCanvasSize;
 };
 
-for (const os in osColl) {
+for (const os of Object.keys(osColl)) {
   if (UA.match(osColl[os]) && window.innerWidth <= maxMobRes.width) {
     getCanvasDimensions();
     arrowsShown = true;
@@ -151,7 +151,7 @@ const colorColl = {
 };
 
 const getColor = () => {
-  for (const obj in colorColl) {
+  for (const obj of Object.keys(colorColl)) {
     colorColl[obj].slider.oninput = () => {
       colorColl[obj].color = colorColl[obj].slider.value;
     };
@@ -191,7 +191,7 @@ const mobileArrows = {
 
 const control = (coll) => {
   document.addEventListener('keydown', (e) => {
-    for (const letter in coll) {
+    for (const letter of Object.keys(coll)) {
       if (e.code === coll[letter].key) {
         snake.dirX = coll[letter].dirX;
         snake.dirY = coll[letter].dirY;
@@ -208,10 +208,10 @@ const mobileInput = (coll) => {
   for (const arrow of arrows) {
     arrow.onclick = () => {
       setFlag();
-      for (const elem in coll) {
-        if (coll[elem].id === arrow.id) {
-          snake.dirX = coll[elem].dirX;
-          snake.dirY = coll[elem].dirY;
+      for (const key of Object.keys(coll)) {
+        if (coll[key].id === arrow.id) {
+          snake.dirX = coll[key].dirX;
+          snake.dirY = coll[key].dirY;
         }
       }
     };
