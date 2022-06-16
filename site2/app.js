@@ -4,6 +4,7 @@ const canvas = document.getElementById('game-canvas');
 const widthSelector = document.querySelectorAll('.fieldSizeBtn');
 const headColor = document.querySelector('#headColor');
 const bodyColor = document.querySelector('#bodyColor');
+const berryColor = document.querySelector('#berryColor');
 const faceExample = document.querySelector('#faceExample');
 const tileExample = document.querySelector('#tileExample');
 const score = document.getElementById('score');
@@ -154,6 +155,7 @@ getCustoms(tileColl);
 const colorColl = {
   head: { slider: headColor, color: null },
   body: { slider: bodyColor, color: null },
+  berry: { slider: berryColor, color: null },
 };
 
 const getColor = () => {
@@ -321,7 +323,7 @@ const drawSnake = () => {
 };
 
 const drawBerry = () => {
-  context.fillStyle = '#CF1B84';
+  context.fillStyle = colorColl.berry.color || berryColor.value;
   context.fillRect(berry.x, berry.y, berry.sizeBerry, berry.sizeBerry);
 };
 
