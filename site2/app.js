@@ -198,7 +198,7 @@ const mobileArrows = {
 };
 
 const control = (coll) => {
-  document.addEventListener('keydown', (e) => {
+  onkeydown = (e) => {
     for (const letter of Object.keys(coll)) {
       if (e.code === coll[letter].key) {
         snake.dirX = coll[letter].dirX;
@@ -206,7 +206,7 @@ const control = (coll) => {
         keybrdPressFlag = true;
       }
     }
-  });
+  };
 };
 control(keysColl);
 
