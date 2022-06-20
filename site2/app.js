@@ -268,8 +268,11 @@ const mobileInput = (coll) => {
       setFlag();
       for (const key of Object.keys(coll)) {
         if (coll[key].id === arrow.id) {
-          snake.dirX = coll[key].dirX;
-          snake.dirY = coll[key].dirY;
+          if (coll[key].oppId !== lastClickedArrow) {
+            snake.dirX = coll[key].dirX;
+            snake.dirY = coll[key].dirY;
+            lastClickedArrow = arrow.id;
+          }
         }
       }
     };
