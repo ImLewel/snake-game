@@ -19,7 +19,6 @@ const restartBtn = document.getElementById('restartBtn');
 const settingsBtn = document.getElementById('settingsBtn');
 const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
-const arrows = document.querySelectorAll('.arrow');
 const UA = navigator.userAgent;
 
 const displayStyles = {
