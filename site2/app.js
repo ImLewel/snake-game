@@ -32,7 +32,7 @@ mobController.style.display = displayStyles.none;
 const roomData = {
   fps: 17,
   secInMilSec: 1000,
-  initialTime: '00:00',
+  initialTime: 'Time: 00:00',
   currTime: null,
   width: 512,
   height: 384,
