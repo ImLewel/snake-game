@@ -94,7 +94,7 @@ for (const os of Object.keys(osColl)) {
     arrowsShown = true;
     roomData.settingsOpened = false;
     settingsMenu.style.display = displayStyles.none;
-    roomData.fps = 13;
+    roomData.fps = 11;
   }
 }
 
@@ -114,7 +114,7 @@ const addStr = (mainStr, secondStr) => (secondStr + mainStr);
 
 const timeFormatter = (secs, mins) => {
   const arr = [secs, mins];
-  for (let [index, elem] of arr.entries()) {
+  for (const [index, elem] of arr.entries()) {
     if (elem < 10) arr[index] = addStr(elem, '0');
   }
   roomData.currTime = arr.join(':');
