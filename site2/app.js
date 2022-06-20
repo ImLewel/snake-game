@@ -110,9 +110,7 @@ const widthBtnIds = {
 
 timer.innerHTML = roomData.initialTime;
 
-const addStr = (mainStr, secondStr) => {
-  return `${secondStr + mainStr}`;
-};
+const addStr = (mainStr, secondStr) => (secondStr + mainStr);
 
 const timeFormatter = (secs, mins) => {
   const arr = [secs, mins];
