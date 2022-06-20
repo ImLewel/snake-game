@@ -156,8 +156,8 @@ nav:hover ~ main { /*Смена размера основной части пр�
 #buttonWrapper > .fieldSizeBtn { /*Кнопки размера поля внутри обертки*/
   font-weight: bold;
   border:solid;
-  height:60px;
-  width: 100px;
+  height:35px;
+  width: 90px;
   border-width: 2px;
   border-color: gray;
   border-radius: 20px;
