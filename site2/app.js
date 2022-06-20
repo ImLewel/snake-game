@@ -258,23 +258,19 @@ const control = (coll) => {
 };
 control(keysColl);
 
-const setFlag = () => (keybrdPressFlag = true);
-
 const mobileInput = (coll) => {
-  for (const arrow of arrows) {
-    arrow.onclick = () => {
-      setFlag();
-      for (const key of Object.keys(coll)) {
-        if (coll[key].id === arrow.id) {
-          if (coll[key].oppId !== lastClickedArrow) {
-            snake.dirX = coll[key].dirX;
-            snake.dirY = coll[key].dirY;
-            lastClickedArrow = arrow.id;
-          }
+  onclick = (event) => {
+    for (const key of Object.keys(coll)) {
+      if (coll[key].id === event.target.id) {
+        if (coll[key].oppId !== lastClickedArrow) {
+          snake.dirX = coll[key].dirX;
+          snake.dirY = coll[key].dirY;
+          lastClickedArrow = coll[key].id;
+          keybrdPressFlag = true;
         }
       }
-    };
-  }
+    }
+  };
 };
 
 if (arrowsShown === true) {
