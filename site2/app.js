@@ -307,7 +307,9 @@ const refreshGame = () => {
   berryPos();
   keybrdPressFlag = false;
   timer.innerHTML = roomData.initialTime;
-  roomData.currTime = roomData.initialTime;
+  roomData.currTime = null;
+  time.sec = 0;
+  time.min = 0;
 };
 
 restartBtn.onclick = () => refreshGame();
