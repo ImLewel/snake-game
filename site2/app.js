@@ -228,27 +228,32 @@ const setSnakeColor = (cell) => {
 };
 
 let keybrdPressFlag = false;
+let lastPressedKey = null;
+let lastClickedArrow = null;
 const keysColl = {
-  w: { key: 'KeyW', dirX: 0, dirY: -snake.stepSize },
-  s: { key: 'KeyS', dirX: 0, dirY: snake.stepSize },
-  a: { key: 'KeyA', dirX: -snake.stepSize, dirY: 0 },
-  d: { key: 'KeyD', dirX: snake.stepSize, dirY: 0 },
+  w: { key: 'KeyW', oppKey: 'KeyS', dirX: 0, dirY: -snake.stepSize },
+  s: { key: 'KeyS', oppKey: 'KeyW', dirX: 0, dirY: snake.stepSize },
+  a: { key: 'KeyA', oppKey: 'KeyD', dirX: -snake.stepSize, dirY: 0 },
+  d: { key: 'KeyD', oppKey: 'KeyA', dirX: snake.stepSize, dirY: 0 },
 };
 
 const mobileArrows = {
-  up: { id: 'up', dirX: 0, dirY: -snake.stepSize },
-  down: { id: 'down', dirX: 0, dirY: snake.stepSize },
-  left: { id: 'left', dirX: -snake.stepSize, dirY: 0 },
-  right: { id: 'right', dirX: snake.stepSize, dirY: 0 },
+  up: { id: 'up', oppId: 'down', dirX: 0, dirY: -snake.stepSize },
+  down: { id: 'down', oppId: 'up', dirX: 0, dirY: snake.stepSize },
+  left: { id: 'left', oppId: 'right', dirX: -snake.stepSize, dirY: 0 },
+  right: { id: 'right', oppId: 'left', dirX: snake.stepSize, dirY: 0 },
 };
 
 const control = (coll) => {
   onkeydown = (e) => {
     for (const letter of Object.keys(coll)) {
       if (e.code === coll[letter].key) {
-        snake.dirX = coll[letter].dirX;
-        snake.dirY = coll[letter].dirY;
-        keybrdPressFlag = true;
+        if (coll[letter].oppKey !== lastPressedKey) {
+          snake.dirX = coll[letter].dirX;
+          snake.dirY = coll[letter].dirY;
+          lastPressedKey = e.code;
+          keybrdPressFlag = true;
+        }
       }
     }
   };
