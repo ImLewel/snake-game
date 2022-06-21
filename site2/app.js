@@ -179,16 +179,16 @@ const berryPos = () => {
 };
 berryPos();
 
-const tileColl = [
-  { slider: faceSlider, ex: faceExample, name: 'faces' },
-  { slider: tileSlider, ex: tileExample, name: 'tiles' },
-];
+const tileColl = {
+  face: { slider: faceSlider, ex: faceExample, name: 'faces' },
+  tile: { slider: tileSlider, ex: tileExample, name: 'tiles' },
+};
 const getCustoms = (coll) => {
-  for (const obj of coll) {
-    obj.slider.oninput = () => {
-      const dir = obj.name;
-      const subDir = obj.name.slice(0, 4);
-      obj.ex.src = `./${dir}/${subDir + obj.slider.value}.png`;
+  for (const obj of Object.keys(coll)) {
+    coll[obj].slider.oninput = () => {
+      const dir = coll[obj].name;
+      const subDir = coll[obj].name.slice(0, 4);
+      coll[obj].ex.src = `./${dir}/${subDir + coll[obj].slider.value}.png`;
     };
   }
 };
@@ -210,7 +210,7 @@ const getColor = () => {
 getColor();
 
 const mapTiler = () => {
-  const pattern = context.createPattern(tileColl[1].ex, 'repeat');
+  const pattern = context.createPattern(tileColl.tile.ex, 'repeat');
   context.fillStyle = pattern;
   context.fillRect(0, 0, canvas.width, canvas.height);
 };
