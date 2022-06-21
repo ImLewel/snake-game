@@ -225,8 +225,11 @@ const setSnakeColor = (cell) => {
 };
 
 let keybrdPressFlag = false;
-let lastPressedKey = null;
-let lastClickedArrow = null;
+const lastInput = {
+  key: null,
+  arrow: null,
+};
+
 const keysColl = {
   w: { key: 'KeyW', oppKey: 'KeyS', dirX: 0, dirY: -snake.stepSize },
   s: { key: 'KeyS', oppKey: 'KeyW', dirX: 0, dirY: snake.stepSize },
@@ -245,10 +248,10 @@ const control = (coll) => {
   onkeydown = (e) => {
     for (const letter of Object.keys(coll)) {
       if (e.code === coll[letter].key) {
-        if (coll[letter].oppKey !== lastPressedKey) {
+        if (coll[letter].oppKey !== lastInput.key) {
           snake.dirX = coll[letter].dirX;
           snake.dirY = coll[letter].dirY;
-          lastPressedKey = e.code;
+          lastInput.key = e.code;
           keybrdPressFlag = true;
         }
       }
@@ -261,10 +264,10 @@ const mobileInput = (coll) => {
   onclick = (event) => {
     for (const key of Object.keys(coll)) {
       if (coll[key].id === event.target.id) {
-        if (coll[key].oppId !== lastClickedArrow) {
+        if (coll[key].oppId !== lastInput.arrow) {
           snake.dirX = coll[key].dirX;
           snake.dirY = coll[key].dirY;
-          lastClickedArrow = coll[key].id;
+          lastInput.arrow = coll[key].id;
           keybrdPressFlag = true;
         }
       }
@@ -315,6 +318,7 @@ const refreshGame = () => {
   resetProp(0, roomData, ['scoreCount', 'currTime']);
   resetProp(0, time, ['sec', 'min']);
   resetProp(roomData.initialTime, timer, 'innerHTML');
+  resetProp(null, lastInput, 'key', 'arrow');
   keybrdPressFlag = false;
   berryPos();
 };
