@@ -318,7 +318,7 @@ const refreshGame = () => {
   resetProp(0, roomData, ['scoreCount', 'currTime']);
   resetProp(0, time, ['sec', 'min']);
   resetProp(roomData.initialTime, timer, 'innerHTML');
-  resetProp(null, lastInput, 'key', 'arrow');
+  resetProp(null, lastInput, ['key', 'arrow']);
   keybrdPressFlag = false;
   berryPos();
 };
