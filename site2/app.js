@@ -297,20 +297,26 @@ const setFieldSize = (normalMult, multX, multY) => {
 };
 setFieldSize(1, 1.5, 1.25);
 
+const resetProp = (value, obj, properties) => {
+  if (typeof properties !== 'undefined') {
+    if (Array.isArray(properties)) {
+      for (const property of properties) {
+        obj[property] = value;
+      }
+    } else obj[properties] = value;
+  }
+};
+
 const refreshGame = () => {
-  snake.x = 160;
-  snake.y = 160;
-  snake.tails = [];
-  snake.maxTails = 20;
-  snake.dirX = 0;
-  snake.dirY = 0;
-  roomData.scoreCount = 0;
-  berryPos();
+  resetProp(0, snake, ['dirX', 'dirY']);
+  resetProp(160, snake, ['x', 'y']);
+  resetProp(20, snake, 'maxTails');
+  resetProp([], snake, 'tails');
+  resetProp(0, roomData, ['scoreCount', 'currTime']);
+  resetProp(0, time, ['sec', 'min']);
+  resetProp(roomData.initialTime, timer, 'innerHTML');
   keybrdPressFlag = false;
-  timer.innerHTML = roomData.initialTime;
-  roomData.currTime = null;
-  time.sec = 0;
-  time.min = 0;
+  berryPos();
 };
 
 restartBtn.onclick = () => refreshGame();
