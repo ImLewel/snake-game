@@ -28,7 +28,6 @@ const sounds = {
   gameover: './sound/gameover.mp3',
 };
 
-
 const soundPlayer = new SoundController(
   '#soundSlider',
   '#soundPic',
@@ -129,7 +128,7 @@ const setSound = (path) => {
   soundPlayer.tryPlay();
 };
 
-const addStr = (mainStr, secondStr) => (secondStr + mainStr);
+const addStr = (mainStr, secondStr) => secondStr + mainStr;
 
 const timeFormatter = (secs, mins) => {
   const arr = [secs, mins];
