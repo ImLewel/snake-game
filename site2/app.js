@@ -21,19 +21,6 @@ const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const UA = navigator.userAgent;
 
-class SoundPlayer extends SoundController {
-  setVolume() {
-    this.slider.oninput = () => {
-      this.file.volume = this.slider.value / this.divider;
-      if (this.file.volume === 0) super.mute();
-      else super.unMute();
-    };
-  }
-  tryPlay() {
-    this.file.play();
-  }
-}
-
 const sounds = {
   none: '',
   berry: './sound/berry.mp3',
@@ -42,7 +29,11 @@ const sounds = {
 };
 
 
-const soundPlayer = new SoundPlayer('#soundSlider', '#soundPic', sounds.none);
+const soundPlayer = new SoundController(
+  '#soundSlider',
+  '#soundPic',
+  sounds.none
+);
 soundPlayer.setVolume();
 
 const displayStyles = {

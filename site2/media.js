@@ -20,22 +20,29 @@ class SoundController {
     this.pic.src = this.onOffPaths.off;
     this.file.muted = true;
   }
-}
-
-class MusicPlayer extends SoundController {
   setVolume() {
     this.slider.oninput = () => {
       this.file.volume = this.slider.value / this.divider;
       if (this.file.volume === 0) {
-        super.mute();
+        this.mute();
         this.file.pause();
-      } else {
-        super.unMute();
-        this.file.play();
-      }
+      } else this.unMute();
+    };
+  }
+  tryPlay() {
+    this.file.play();
+  }
+  callEvent() {
+    this.slider.onmouseenter = () => {
+      this.tryPlay();
     };
   }
 }
 
-const music = new MusicPlayer('#musicSlider', '#musicPic', './music/ambientMusic.mp3');
-music.setVolume();
+const musicPlayer = new SoundController(
+  '#musicSlider',
+  '#musicPic',
+  './music/ambientMusic.mp3'
+);
+musicPlayer.setVolume();
+musicPlayer.callEvent();
