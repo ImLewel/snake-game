@@ -21,6 +21,30 @@ const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const UA = navigator.userAgent;
 
+class SoundPlayer extends SoundController {
+  setVolume() {
+    this.slider.oninput = () => {
+      this.file.volume = this.slider.value / this.divider;
+      if (this.file.volume === 0) super.mute();
+      else super.unMute();
+    };
+  }
+  tryPlay() {
+    this.file.play();
+  }
+}
+
+const sounds = {
+  none: '',
+  berry: './sound/berry.mp3',
+  win: './sound/win.mp3',
+  gameover: './sound/gameover.mp3',
+};
+
+
+const soundPlayer = new SoundPlayer('#soundSlider', '#soundPic', sounds.none);
+soundPlayer.setVolume();
+
 const displayStyles = {
   shown: '',
   none: 'none',
@@ -108,6 +132,11 @@ const widthBtnIds = {
 };
 
 timer.innerHTML = roomData.initialTime;
+
+const setSound = (path) => {
+  soundPlayer.file.src = path;
+  soundPlayer.tryPlay();
+};
 
 const addStr = (mainStr, secondStr) => (secondStr + mainStr);
 
@@ -320,6 +349,7 @@ const refreshGame = () => {
   resetProp(roomData.initialTime, timer, 'innerHTML');
   resetProp(null, lastInput, ['key', 'arrow']);
   keybrdPressFlag = false;
+  setSound(sounds.gameover);
   berryPos();
 };
 
@@ -357,6 +387,7 @@ const checkBerryCollision = (cell) => {
     if (roomData.scoreCount >= roomData.recordCount) {
       roomData.recordCount += roomData.currBonus;
     }
+    setSound(sounds.berry);
     roomData.scoreCount += roomData.currBonus;
     snake.maxTails += roomData.currBonus;
     berryPos();
@@ -393,6 +424,7 @@ const checkWin = () => {
   const area = cellsByX * cellsByY;
   if (snake.maxTails === area) {
     roomData.winsCount++;
+    setSound(sounds.win);
     refreshGame();
   }
 };
