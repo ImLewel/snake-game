@@ -148,7 +148,9 @@ nav:hover ~ main { /*Смена размера основной части пр�
 #buttonWrapper { /*Обертка кнопок*/
   display: grid;
   position:relative;
-  grid-template-columns: 130px 130px;
+  align-items:center;
+  justify-content:center;
+  grid-template-columns: 70px 95px 95px;
   padding-top:1%;
   padding-bottom:1%;
 }
