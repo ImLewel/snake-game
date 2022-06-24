@@ -1,27 +1,41 @@
 'use strict';
 
-const myAudio = new Audio('./music/ambientMusic.mp3');
-const musicSlider = document.querySelector('#musicSlider');
-const musicPic = document.querySelector('#musicPic');
-const divider = 10;
-const onOffPaths = {
-  off: './volumeIcons/volumeOff.png',
-  on: './volumeIcons/volumeOn.png',
-};
-myAudio.volume = 0;
+class SoundController {
+  constructor(path, sliderClass) {
+    this.file = new Audio(path);
+    this.musicSlider = document.querySelector(sliderClass);
+    this.musicPic = document.querySelector('#musicPic');
+    this.divider = 10;
+    this.file.volume = 0;
+    this.onOffPaths = {
+      off: './volumeIcons/volumeOff.png',
+      on: './volumeIcons/volumeOn.png',
+    };
+  }
+  start() {
+    this.musicPic.src = this.onOffPaths.on;
+    this.file.muted = false;
+    this.file.play();
+  }
+  stop() {
+    this.musicPic.src = this.onOffPaths.off;
+    this.file.muted = true;
+    this.file.pause();
+  }
+}
 
-const setVolume = () => {
-  musicSlider.oninput = () => {
-    myAudio.volume = musicSlider.value / divider;
-    if (myAudio.volume === 0) {
-      musicPic.src = onOffPaths.off;
-      myAudio.muted = true;
-      myAudio.pause();
-    } else {
-      musicPic.src = onOffPaths.on;
-      myAudio.muted = false;
-      myAudio.play();
-    }
-  };
-};
-setVolume();
+class MusicPlayer extends SoundController {
+  setVolume() {
+    this.musicSlider.oninput = () => {
+      this.file.volume = this.musicSlider.value / this.divider;
+      if (this.file.volume === 0) {
+        super.stop();
+      } else {
+        super.start();
+      }
+    };
+  }
+}
+
+const music = new MusicPlayer('./music/ambientMusic.mp3', '#musicSlider');
+music.setVolume();
