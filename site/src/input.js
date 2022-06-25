@@ -37,7 +37,7 @@ const control = (coll) => {
 control(keysColl);
 
 const mobileInput = (coll) => {
-  onclick = (event) => {
+  mobController.onclick = (event) => {
     for (const key of Object.keys(coll)) {
       if (coll[key].id === event.target.id) {
         if (coll[key].oppId !== lastInput.arrow) {

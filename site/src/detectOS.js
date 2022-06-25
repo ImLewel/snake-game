@@ -1,13 +1,13 @@
 'use strict';
 
-const osColl = {
-  android: 'Android',
-  iPhone: 'iPhone',
-  iPad: 'iPad',
-  iPod: 'iPod',
-  blackBerry: 'BlackBerry',
-  operaMini: 'Opera Mini',
-};
+const osColl = [
+  'Android',
+  'iPhone',
+  'iPad',
+  'iPod',
+  'BlackBerry',
+  'Opera Mini',
+];
 
 const mobCanvasSize = [224, 192];
 const maxMobRes = { width: 500, height: 900 };
@@ -17,12 +17,17 @@ const getCanvasDimensions = () => {
   [roomData.width, roomData.height] = mobCanvasSize;
 };
 
-for (const os of Object.keys(osColl)) {
-  if (UA.match(osColl[os]) && window.innerWidth <= maxMobRes.width) {
-    getCanvasDimensions();
-    arrowsShown = true;
-    roomData.settingsOpened = false;
-    settingsMenu.style.display = displayStyles.none;
-    roomData.fps = 11;
-  }
+const checkOS = () => osColl.some((item) => UA.match(item));
+
+if (checkOS()) {
+  getCanvasDimensions();
+  arrowsShown = true;
+  roomData.settingsOpened = false;
+  settingsMenu.style.display = displayStyles.none;
+  roomData.fps = 9;
 }
+
+canvas.width = roomData.width;
+canvas.height = roomData.height;
+canvas.style.width = `${roomData.width}px`;
+canvas.style.height = `${roomData.height}px`;

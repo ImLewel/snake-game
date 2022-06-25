@@ -44,11 +44,6 @@ const roomData = {
 };
 roomData.frameTime = roomData.secInMilSec / roomData.fps;
 
-canvas.width = roomData.width;
-canvas.height = roomData.height;
-canvas.style.width = `${roomData.width}px`;
-canvas.style.height = `${roomData.height}px`;
-
 const snake = {
   sizeCell: 16,
   x: 160,
