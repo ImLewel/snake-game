@@ -8,8 +8,8 @@ class SoundController {
     this.divider = 10;
     this.file.volume = 0;
     this.onOffPaths = {
-      off: './volumeIcons/volumeOff.png',
-      on: './volumeIcons/volumeOn.png',
+      off: '../volumeIcons/volumeOff.png',
+      on: '../volumeIcons/volumeOn.png',
     };
   }
   unMute() {
