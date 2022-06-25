@@ -3,24 +3,28 @@
 const widthBtns = {};
 [widthBtns.normal, widthBtns.wide] = Object.values(widthSelector);
 
+const coll = {};
+
 const setFieldSize = (normalMult, multX, multY) => {
-  let currMultX = multX;
-  let currMultY = multY;
   let currId;
+  [coll.currMultX, coll.currMultY, coll.prevMultX] = [normalMult];
   onclick = (event) => {
     if (!keybrdPressFlag) {
       currId = event.target.id;
+      coll.prevMultX = coll.currMultX;
       if (currId === widthBtns.normal.id) {
-        currMultX = normalMult;
-        currMultY = normalMult;
+        coll.currMultX = normalMult;
+        coll.currMultY = normalMult;
       } else if (currId === widthBtns.wide.id) {
-        currMultX = multX;
-        currMultY = multY;
+        coll.currMultX = multX;
+        coll.currMultY = multY;
       }
-      canvas.width = roomData.width * currMultX;
-      canvas.height = roomData.height * currMultY;
-      canvas.style.width = `${roomData.width * currMultX}px`;
-      canvas.style.height = `${roomData.height * currMultY}px`;
+      if (coll.currMultX !== coll.prevMultX) {
+        canvas.width = roomData.width * coll.currMultX;
+        canvas.height = roomData.height * coll.currMultY;
+        canvas.style.width = `${roomData.width * coll.currMultX}px`;
+        canvas.style.height = `${roomData.height * coll.currMultY}px`;
+      }
     }
   };
 };
