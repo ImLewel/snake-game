@@ -33,9 +33,11 @@ const tileColl = {
 const getCustoms = (coll) => {
   for (const obj of Object.keys(coll)) {
     coll[obj].slider.oninput = () => {
+      const main = '../site/';
       const dir = coll[obj].name;
       const subDir = coll[obj].name.slice(0, 4);
-      coll[obj].ex.src = `./${dir}/${subDir + coll[obj].slider.value}.png`;
+      const currFile = subDir + coll[obj].slider.value;
+      coll[obj].ex.src = `${main}/${dir}/${currFile}.png`;
     };
   }
 };

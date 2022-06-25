@@ -8,8 +8,8 @@ class SoundController {
     this.divider = 10;
     this.file.volume = 0;
     this.onOffPaths = {
-      off: '../volumeIcons/volumeOff.png',
-      on: '../volumeIcons/volumeOn.png',
+      off: '../site/volumeIcons/volumeOff.png',
+      on: '../site/volumeIcons/volumeOn.png',
     };
   }
   unMute() {
@@ -42,7 +42,7 @@ class SoundController {
 const musicPlayer = new SoundController(
   '#musicSlider',
   '#musicPic',
-  './music/ambientMusic.mp3'
+  '../site/music/ambientMusic.mp3'
 );
 musicPlayer.setVolume();
 musicPlayer.callEvent();

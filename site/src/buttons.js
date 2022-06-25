@@ -14,8 +14,8 @@ settingsBtn.onclick = () => {
 
 let isPaused = false;
 const playIcons = {
-  play: './icons/continue.png',
-  pause: './icons/pause.png',
+  play: '../site/icons/continue.png',
+  pause: '../site/icons/pause.png',
 };
 
 pauseBtn.onclick = () => {

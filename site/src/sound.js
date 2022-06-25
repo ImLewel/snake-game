@@ -2,9 +2,9 @@
 
 const sounds = {
   none: '',
-  berry: './sound/berry.mp3',
-  win: './sound/win.mp3',
-  gameover: './sound/gameover.mp3',
+  berry: '../site/sound/berry.mp3',
+  win: '../site/sound/win.mp3',
+  gameover: '../site/sound/gameover.mp3',
 };
 
 const soundPlayer = new SoundController(
