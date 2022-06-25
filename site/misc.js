@@ -1,21 +1,26 @@
 'use strict';
 
+const widthBtns = {};
+[widthBtns.normal, widthBtns.wide] = Object.values(widthSelector);
+
 const setFieldSize = (normalMult, multX, multY) => {
   if (!keybrdPressFlag) {
-    for (const btn of widthSelector) {
-      let currMultX = multX;
-      let currMultY = multY;
-      btn.onclick = () => {
-        if (btn.id === widthBtnIds.normal) {
-          currMultX = normalMult;
-          currMultY = normalMult;
-        }
-        canvas.width = roomData.width * currMultX;
-        canvas.height = roomData.height * currMultY;
-        canvas.style.width = `${roomData.width * currMultX}px`;
-        canvas.style.height = `${roomData.height * currMultY}px`;
-      };
-    }
+    let currMultX = multX;
+    let currMultY = multY;
+    onclick = (event) => {
+      if (event.target.id === widthBtns.normal.id) {
+        currMultX = normalMult;
+        currMultY = normalMult;
+      } else {
+        currMultX = multX;
+        currMultY = multY;
+      }
+      console.log(currMultX);
+      canvas.width = roomData.width * currMultX;
+      canvas.height = roomData.height * currMultY;
+      canvas.style.width = `${roomData.width * currMultX}px`;
+      canvas.style.height = `${roomData.height * currMultY}px`;
+    };
   }
 };
 setFieldSize(1, 1.5, 1.25);
