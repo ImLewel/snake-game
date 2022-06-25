@@ -10,79 +10,85 @@
 </head>
 
 <body>
-    <header>
-        <h3>Welcome to the snake game!</h3>
-    </header>
-        <main id="main">
-            <div id="canvasWrapper">
-                <canvas id="game-canvas"></canvas>
-                <div id="controlsWrapper">
-                    <div id="pauseRestartWrapper">
-                        <img src="./icons/pause.png" role="button" id="pauseBtn">
-                        <img src="./icons/restart.png" role="button" id="restartBtn">
-                        <img src="./icons/settings.png" role="button" id="settingsBtn">
-                    </div>
-                    <div id="dataField">
-                        <div id="scores">
-                            <span id="score">Score</span>
-                            <span id="record">Record</span>
-                            <span id="wins">Wins</span>
-                            <span id="timer">Time</span>
-                        </div>
-                        <div class="slidersWrapper">
-                            <span style="text-align:center">Head</span>
-                            <input style="width: 150px; cursor: pointer;" type="color" id="headColor" name="head" value="#02cc05">
-                            <div style="width: 40px;">⬅🖱</div>
-                            <span style="text-align:center">Body</span>
-                            <input style="width: 150px; cursor: pointer;" type="color" id="bodyColor" name="body" value="#029e04">
-                            <div style="width: 40px;">⬅🖱</div>
-                            <span style="text-align:center">Berry</span>
-                            <input style="width: 150px; cursor: pointer;" type="color" id="berryColor" name="berry" value="#cf1b84">
-                            <div style="width: 40px;">⬅🖱</div>
-                            <span style="text-align:center">Face</span>
-                            <input type="range" min="0" max="3" value="0" class="slider" id="faceSlider">
-                            <img src="./faces/face0.png" id="faceExample" style="height:30px; width:30px" class="examples">
-                            <span style="text-align:center">Tile</span>
-                            <input type="range" min="0" max="3" value="0" class="slider" id="tileSlider">
-                            <img src="./tiles/tile0.png" id="tileExample" style="height:30px; width:30px" class="examples">
-                            <span style="text-align:center">Music</span>
-                            <input type="range" min="0" max="10" value="0" class="slider" id="musicSlider">
-                            <img id="musicPic" src="./volumeIcons/volumeOff.png" style="height:30px; width:30px" class="examples">
-                            <span style="text-align:center">Sound</span>
-                            <input type="range" min="0" max="10" value="0" class="slider" id="soundSlider">
-                            <img id="soundPic" src="./volumeIcons/volumeOff.png" style="height:30px; width:30px" class="examples">
-                        </div>
-                        <div id="buttonWrapper">
-                            <span style="position:relative; top:0; width: contain; text-align:center;">Field:</span>
-                            <button class="fieldSizeBtn" id="normal">Normal</button>
-                            <button class="fieldSizeBtn" id="wide">Large</button>
-                        </div>
-                    </div>
-                    <div id="mobController">
-                        <div style="width: 64px; height: 64px;"></div>
-                        <img class="arrow" id="up" src="./inputIcons/up.png" alt="">
-                        <div style="width: 64px; height: 64px;"></div>
-                        <img class="arrow" id="left" src="./inputIcons/left.png" alt="">
-                        <div style="width: 64px; height: 64px;"></div>
-                        <img class="arrow" id="right" src="./inputIcons/right.png" alt="">
-                        <div style="width: 64px; height: 64px;"></div>
-                        <img class="arrow" id="down" src="./inputIcons/down.png" alt="">
-                        <div style="width: 64px; height: 64px;"></div>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <h3>Made by ImLewel</h3>
-        </footer>
-        <script src="./src/init.js"></script>
-        <script src="./src/timer.js"></script>
-        <script src="./src/detectOS.js"></script>  
-    <script src="./src/media.js"></script>
-    <script src="./src/sound.js"></script>
-    <script src="./src/buttons.js"></script>    
-    <script src="./src/app.js"></script>
-    <script src="./src/input.js"></script>
-    <script src="./src/misc.js"></script>
-    <script src="./src/loop.js"></script>
+
+  <header>
+    <h3>Welcome to the snake game!</h3>
+  </header>
+
+  <main id="main">
+    <div id="canvasWrapper">
+      <canvas id="game-canvas"></canvas>
+      <div id="controlsWrapper">
+        <div id="pauseRestartWrapper">
+          <img src="./icons/pause.png" role="button" id="pauseBtn">
+          <img src="./icons/restart.png" role="button" id="restartBtn">
+          <img src="./icons/settings.png" role="button" id="settingsBtn">
+        </div>
+        <div id="dataField">
+          <div id="scores">
+            <span id="score">Score</span>
+            <span id="record">Record</span>
+            <span id="wins">Wins</span>
+            <span id="timer">Time</span>
+          </div>
+          <div class="slidersWrapper">
+            <span style="text-align:center">Head</span>
+            <input style="width: 150px; cursor: pointer;" type="color" id="headColor" name="head" value="#02cc05">
+            <div style="width: 40px;">⬅🖱</div>
+            <span style="text-align:center">Body</span>
+            <input style="width: 150px; cursor: pointer;" type="color" id="bodyColor" name="body" value="#029e04">
+            <div style="width: 40px;">⬅🖱</div>
+            <span style="text-align:center">Berry</span>
+            <input style="width: 150px; cursor: pointer;" type="color" id="berryColor" name="berry" value="#cf1b84">
+            <div style="width: 40px;">⬅🖱</div>
+            <span style="text-align:center">Face</span>
+            <input type="range" min="0" max="3" value="0" class="slider" id="faceSlider">
+            <img src="./faces/face0.png" id="faceExample" style="height:30px; width:30px" class="examples">
+            <span style="text-align:center">Tile</span>
+            <input type="range" min="0" max="3" value="0" class="slider" id="tileSlider">
+            <img src="./tiles/tile0.png" id="tileExample" style="height:30px; width:30px" class="examples">
+            <span style="text-align:center">Music</span>
+            <input type="range" min="0" max="10" value="0" class="slider" id="musicSlider">
+            <img id="musicPic" src="./volumeIcons/volumeOff.png" style="height:30px; width:30px" class="examples">
+            <span style="text-align:center">Sound</span>
+            <input type="range" min="0" max="10" value="0" class="slider" id="soundSlider">
+            <img id="soundPic" src="./volumeIcons/volumeOff.png" style="height:30px; width:30px" class="examples">
+          </div>
+          <div id="buttonWrapper">
+            <span style="position:relative; top:0; width: contain; text-align:center;">Field:</span>
+            <button class="fieldSizeBtn" id="normal">Normal</button>
+            <button class="fieldSizeBtn" id="wide">Large</button>
+          </div>
+        </div>
+        <div id="mobController">
+          <div style="width: 64px; height: 64px;"></div>
+            <img class="arrow" id="up" src="./inputIcons/up.png" alt="">
+            <div style="width: 64px; height: 64px;"></div>
+            <img class="arrow" id="left" src="./inputIcons/left.png" alt="">
+            <div style="width: 64px; height: 64px;"></div>
+            <img class="arrow" id="right" src="./inputIcons/right.png" alt="">
+            <div style="width: 64px; height: 64px;"></div>
+            <img class="arrow" id="down" src="./inputIcons/down.png" alt="">
+            <div style="width: 64px; height: 64px;"></div>                    
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <h3>Made by ImLewel</h3>
+  </footer>
+
+  <script src="./src/init.js"></script>
+  <script src="./src/timer.js"></script>
+  <script src="./src/detectOS.js"></script>  
+  <script src="./src/media.js"></script>
+  <script src="./src/sound.js"></script>
+  <script src="./src/buttons.js"></script>    
+  <script src="./src/app.js"></script>
+  <script src="./src/input.js"></script>
+  <script src="./src/misc.js"></script>
+  <script src="./src/loop.js"></script>
+
 </body>
