@@ -1,75 +1,6 @@
 'use strict';
 
-const canvas = document.getElementById('game-canvas');
-const widthSelector = document.querySelectorAll('.fieldSizeBtn');
-const headColor = document.querySelector('#headColor');
-const bodyColor = document.querySelector('#bodyColor');
-const berryColor = document.querySelector('#berryColor');
-const faceExample = document.querySelector('#faceExample');
-const tileExample = document.querySelector('#tileExample');
-const score = document.getElementById('score');
-const record = document.getElementById('record');
-const wins = document.getElementById('wins');
-const timer = document.getElementById('timer');
-const context = canvas.getContext('2d');
-const faceSlider = document.getElementById('faceSlider');
-const tileSlider = document.getElementById('tileSlider');
-const pauseBtn = document.getElementById('pauseBtn');
-const restartBtn = document.getElementById('restartBtn');
-const settingsBtn = document.getElementById('settingsBtn');
-const settingsMenu = document.getElementById('dataField');
-const mobController = document.getElementById('mobController');
-const UA = navigator.userAgent;
-
-const sounds = {
-  none: '',
-  berry: './sound/berry.mp3',
-  win: './sound/win.mp3',
-  gameover: './sound/gameover.mp3',
-};
-
-const soundPlayer = new SoundController(
-  '#soundSlider',
-  '#soundPic',
-  sounds.none
-);
-soundPlayer.setVolume();
-
-const displayStyles = {
-  shown: '',
-  none: 'none',
-};
-
 mobController.style.display = displayStyles.none;
-
-const roomData = {
-  fps: 17,
-  secInMilSec: 1000,
-  initialTime: 'Time: 00:00',
-  currTime: null,
-  width: 512,
-  height: 384,
-  scoreCount: 0,
-  recordCount: 0,
-  winsCount: 0,
-  avaliableBonus: { small: 1, big: 2 },
-  currBonus: 0,
-  settingsOpened: true,
-};
-
-const frameTime = roomData.secInMilSec / roomData.fps;
-
-const time = {
-  msec: 0,
-  sec: 0,
-  min: 0,
-};
-
-const maxTime = {
-  msec: 1000,
-  sec: 60,
-  min: 60,
-};
 
 const snake = {
   sizeCell: 16,
@@ -84,33 +15,6 @@ const snake = {
   face: null,
 };
 
-const osColl = {
-  android: 'Android',
-  iPhone: 'iPhone',
-  iPad: 'iPad',
-  iPod: 'iPod',
-  blackBerry: 'BlackBerry',
-  operaMini: 'Opera Mini',
-};
-
-const mobCanvasSize = [224, 192];
-const maxMobRes = { width: 500, height: 900 };
-let arrowsShown = false;
-
-const getCanvasDimensions = () => {
-  [roomData.width, roomData.height] = mobCanvasSize;
-};
-
-for (const os of Object.keys(osColl)) {
-  if (UA.match(osColl[os]) && window.innerWidth <= maxMobRes.width) {
-    getCanvasDimensions();
-    arrowsShown = true;
-    roomData.settingsOpened = false;
-    settingsMenu.style.display = displayStyles.none;
-    roomData.fps = 11;
-  }
-}
-
 canvas.width = roomData.width;
 canvas.height = roomData.height;
 canvas.style.width = `${roomData.width}px`;
@@ -122,35 +26,6 @@ const widthBtnIds = {
 };
 
 timer.innerHTML = roomData.initialTime;
-
-const setSound = (path) => {
-  soundPlayer.file.src = path;
-  soundPlayer.tryPlay();
-};
-
-const addStr = (mainStr, secondStr) => secondStr + mainStr;
-
-const timeFormatter = (secs, mins) => {
-  const arr = [secs, mins];
-  for (const [index, elem] of arr.entries()) {
-    if (elem < 10) arr[index] = addStr(elem, '0');
-  }
-  roomData.currTime = arr.join(':');
-  timer.innerHTML = `Time: ${roomData.currTime}`;
-};
-
-const countTime = (coll, maxTime, frameTime) => {
-  coll.msec += frameTime;
-  if (coll.msec >= maxTime.msec) {
-    coll.msec -= maxTime.msec;
-    coll.sec++;
-  }
-  if (coll.sec === maxTime.sec) {
-    coll.sec -= maxTime.sec;
-    coll.min++;
-  }
-  timeFormatter(coll.sec, coll.min);
-};
 
 const berry = {
   x: 0,
@@ -170,21 +45,6 @@ const randPos = (dimension) => {
   const tilePos = tileNum * snake.sizeCell;
   const truePos = tilePos + indent;
   return truePos;
-};
-
-let isPaused = false;
-const playIcons = {
-  play: './icons/continue.png',
-  pause: './icons/pause.png',
-};
-pauseBtn.onclick = () => {
-  if (!isPaused) {
-    isPaused = true;
-    pauseBtn.src = playIcons.play;
-  } else {
-    isPaused = false;
-    pauseBtn.src = playIcons.pause;
-  }
 };
 
 const smallBerryChance = 0.75;
@@ -294,10 +154,6 @@ const mobileInput = (coll) => {
   };
 };
 
-if (arrowsShown === true) {
-  mobController.style.display = displayStyles.shown;
-  mobileInput(mobileArrows);
-}
 
 const setFieldSize = (normalMult, multX, multY) => {
   if (!keybrdPressFlag) {
@@ -341,18 +197,6 @@ const refreshGame = () => {
   keybrdPressFlag = false;
   setSound(sounds.gameover);
   berryPos();
-};
-
-restartBtn.onclick = () => refreshGame();
-
-settingsBtn.onclick = () => {
-  if (roomData.settingsOpened === false) {
-    settingsMenu.style.display = displayStyles.shown;
-    roomData.settingsOpened = true;
-  } else {
-    settingsMenu.style.display = displayStyles.none;
-    roomData.settingsOpened = false;
-  }
 };
 
 const collisionBorder = () => {
@@ -432,6 +276,6 @@ const gameLoop = () => {
       record.innerHTML = `Best score: ${roomData.recordCount}`;
       wins.innerHTML = `Wins: ${roomData.winsCount}`;
     }
-  }, frameTime);
+  }, roomData.frameTime);
 };
 gameLoop();

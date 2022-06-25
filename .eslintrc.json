@@ -187,6 +187,12 @@
     "no-unmodified-loop-condition": [
       "error"
     ],
+    "no-undef": [
+      0
+    ],
+    "no-unused-vars": [
+      0
+    ],
     "no-constant-condition": [
       "error",
       {
