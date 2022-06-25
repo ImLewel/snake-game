@@ -49,11 +49,6 @@ canvas.height = roomData.height;
 canvas.style.width = `${roomData.width}px`;
 canvas.style.height = `${roomData.height}px`;
 
-const widthBtnIds = {
-  normal: 'normal',
-  wide: 'wide',
-};
-
 const snake = {
   sizeCell: 16,
   x: 160,

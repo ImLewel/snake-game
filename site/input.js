@@ -51,3 +51,8 @@ const mobileInput = (coll) => {
   };
 };
 
+if (arrowsShown === true) {
+  mobController.style.display = displayStyles.shown;
+  mobileInput(mobileArrows);
+}
+
