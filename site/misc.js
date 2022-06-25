@@ -4,11 +4,11 @@ const widthBtns = {};
 [widthBtns.normal, widthBtns.wide] = Object.values(widthSelector);
 
 const setFieldSize = (normalMult, multX, multY) => {
-  if (!keybrdPressFlag) {
-    let currMultX = multX;
-    let currMultY = multY;
-    let currId;
-    onclick = (event) => {
+  let currMultX = multX;
+  let currMultY = multY;
+  let currId;
+  onclick = (event) => {
+    if (!keybrdPressFlag) {
       currId = event.target.id;
       if (currId === widthBtns.normal.id) {
         currMultX = normalMult;
@@ -21,8 +21,8 @@ const setFieldSize = (normalMult, multX, multY) => {
       canvas.height = roomData.height * currMultY;
       canvas.style.width = `${roomData.width * currMultX}px`;
       canvas.style.height = `${roomData.height * currMultY}px`;
-    };
-  }
+    }
+  };
 };
 setFieldSize(1, 1.5, 1.25);
 
