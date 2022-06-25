@@ -15,7 +15,6 @@ const setFieldSize = (normalMult, multX, multY) => {
         currMultX = multX;
         currMultY = multY;
       }
-      console.log(currMultX);
       canvas.width = roomData.width * currMultX;
       canvas.height = roomData.height * currMultY;
       canvas.style.width = `${roomData.width * currMultX}px`;
