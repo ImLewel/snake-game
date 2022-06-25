@@ -1,11 +1,5 @@
 'use strict';
 
-const displayStyles = {
-  shown: '',
-  none: 'none',
-};
-
-
 const osColl = {
   android: 'Android',
   iPhone: 'iPhone',

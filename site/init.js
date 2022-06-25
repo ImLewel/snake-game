@@ -21,6 +21,13 @@ const settingsMenu = document.getElementById('dataField');
 const mobController = document.getElementById('mobController');
 const UA = navigator.userAgent;
 
+const displayStyles = {
+  shown: '',
+  none: 'none',
+};
+
+mobController.style.display = displayStyles.none;
+
 const roomData = {
   fps: 17,
   secInMilSec: 1000,
@@ -36,3 +43,35 @@ const roomData = {
   settingsOpened: true,
 };
 roomData.frameTime = roomData.secInMilSec / roomData.fps;
+
+canvas.width = roomData.width;
+canvas.height = roomData.height;
+canvas.style.width = `${roomData.width}px`;
+canvas.style.height = `${roomData.height}px`;
+
+const widthBtnIds = {
+  normal: 'normal',
+  wide: 'wide',
+};
+
+const snake = {
+  sizeCell: 16,
+  x: 160,
+  y: 160,
+  dirX: 0,
+  dirY: 0,
+  stepSize: 16,
+  tails: [],
+  maxTails: 20,
+  head: null,
+  face: null,
+};
+
+const berry = {
+  x: 0,
+  y: 0,
+  avaliableSize: { small: 8, big: 16 },
+  sizeBerry: 8,
+};
+
+timer.innerHTML = roomData.initialTime;
