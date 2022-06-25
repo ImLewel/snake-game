@@ -7,11 +7,13 @@ const setFieldSize = (normalMult, multX, multY) => {
   if (!keybrdPressFlag) {
     let currMultX = multX;
     let currMultY = multY;
+    let currId;
     onclick = (event) => {
-      if (event.target.id === widthBtns.normal.id) {
+      currId = event.target.id;
+      if (currId === widthBtns.normal.id) {
         currMultX = normalMult;
         currMultY = normalMult;
-      } else {
+      } else if (currId === widthBtns.wide.id) {
         currMultX = multX;
         currMultY = multY;
       }
