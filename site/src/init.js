@@ -42,7 +42,6 @@ const roomData = {
   currBonus: 0,
   settingsOpened: true,
 };
-roomData.frameTime = roomData.secInMilSec / roomData.fps;
 
 const snake = {
   sizeCell: 16,

@@ -24,9 +24,10 @@ if (checkOS()) {
   arrowsShown = true;
   roomData.settingsOpened = false;
   settingsMenu.style.display = displayStyles.none;
-  roomData.fps = 9;
+  roomData.fps = 10;
 }
 
+roomData.frameTime = roomData.secInMilSec / roomData.fps;
 canvas.width = roomData.width;
 canvas.height = roomData.height;
 canvas.style.width = `${roomData.width}px`;
