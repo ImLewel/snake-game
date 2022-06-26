@@ -51,7 +51,7 @@ const snake = {
   dirY: 0,
   stepSize: 16,
   tails: [],
-  maxTails: 20,
+  maxTails: 10,
   head: null,
   face: null,
 };

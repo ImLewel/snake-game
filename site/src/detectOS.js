@@ -25,6 +25,7 @@ if (checkOS()) {
   roomData.settingsOpened = false;
   settingsMenu.style.display = displayStyles.none;
   roomData.fps = 10;
+  snake.maxTails = 4;
 }
 
 roomData.frameTime = roomData.secInMilSec / roomData.fps;
